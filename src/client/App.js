@@ -1,30 +1,24 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import axios from './helpers/axios';
+import React, { useState, useEffect } from "react";
+import axios from "./helpers/axios";
+import NavBar from "./components/NavBar";
+import LoginForm from "./components/Login";
+import ContentWrapper from "./components/ContentWrapper"
 
-class App extends React.Component {
+const App = props => {
+  const [display, setDisplay] = useState("Hello World!");
+  useEffect(() => {
+    document.title = "Hello World!";
+    axios.get("/").then(res => setDisplay(res.data));
+  });
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      'display': 'Hello Word'
-    }
-  }
-
-  async componentDidMount() {
-    axios.get('/')
-      .then(response => this.setState({
-        'display': response.data
-      }));
-  }
-
-  render() {
-    return (
-      <div>
-        <h1> {this.state.display} </h1>
-      </div>
-    );
-  }
-}
+  return (
+    <React.Fragment>
+      <NavBar />
+      <ContentWrapper>
+        <LoginForm />
+      </ContentWrapper>
+    </React.Fragment>
+  );
+};
 
 export default App;
