@@ -1,22 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import axios from 'axios';
+import axios from './helpers/axios';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      'display': ''
+      'display': 'Hello Word'
     }
   }
 
-  componentDidMount() {
-    axios.get('https://localhost:8080')
-      .then(res => res.json())
-      .then(displayStr => this.setState({
-        'display': displayStr
-      }))
+  async componentDidMount() {
+    axios.get('/')
+      .then(response => this.setState({
+        'display': response.data
+      }));
   }
 
   render() {

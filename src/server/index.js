@@ -1,11 +1,12 @@
-const koa = require('koa');
-const app = new koa()
-const Router = require('koa-router');
-const router = new Router();
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 8080;
+const cors = require('cors');
 
-router.get('/', ctx => {
-    ctx.body = 'Hello World from KOA!!!';
-})
+app.use(cors());
 
-app.use(router.routes()).use(router.allowedMethods());
-app.listen(8080);
+app.get('/', (req, res) => {
+    res.send("Hello World!");
+});
+
+app.listen(PORT);

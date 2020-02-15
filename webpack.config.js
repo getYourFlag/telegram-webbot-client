@@ -2,7 +2,7 @@ const path = require("path");
 const outputDirectory = "public";
 
 module.exports = {
-    entry: [ "./src/client/index.js"],
+    entry: ["babel-polyfill", "./src/client/index.js"],
     output: {
         path: path.join(__dirname, outputDirectory),
         filename: "bundle.js"
