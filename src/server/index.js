@@ -1,15 +1,13 @@
-const express = require('express');
-const app = express();
+const app = require("./services/express");
+const mongoose = require("mongoose");
 const PORT = process.env.PORT || 8080;
-const cors = require('cors');
 
-const webhook = require('./routers/webhook');
-
-app.use(cors());
-
-app.get('/', (req, res) => {
-    res.send("Hello Express!");
+mongoose.connect("mongodb://127.0.0.1/tgwebbot", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 });
-app.use('/webhook', webhook);
+const db = mongoose.connection;
+
+db.on("error", console.error.bind(console, "MongoDB Connection Error."));
 
 app.listen(PORT);

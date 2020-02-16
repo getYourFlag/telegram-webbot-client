@@ -1,8 +1,7 @@
-import React from 'react';
-import {HashRouter, Switch, Route} from 'react-router-dom';
-import LoginForm from '../pages/Login';
-
-const UserRoute = () => <p>User Route Reached!</p>
+import React from "react";
+import { HashRouter, Switch, Route } from "react-router-dom";
+import LoginForm from "../pages/Login";
+import MainPage from "../pages/MainPage";
 
 const Router = props => {
     function login(username, password) {
@@ -13,13 +12,15 @@ const Router = props => {
     return (
         <HashRouter>
             <Switch>
-                <Route exact path="/" 
-                    render = {props => <LoginForm {...props} login={login} />}
+                <Route
+                    exact
+                    path="/"
+                    render={props => <LoginForm {...props} login={login} />}
                 />
-                <Route path="/user" component={UserRoute}/>
+                <Route path="/user" component={MainPage} />
             </Switch>
         </HashRouter>
     );
-}
+};
 
-export default Router
+export default Router;
