@@ -1,12 +1,12 @@
 import React from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
-import LoginForm from "../pages/Login";
+import LoginForm from "../pages/LoginForm";
 import MainPage from "../pages/MainPage";
+import axios from '../helpers/axios';
 
 const Router = props => {
     function login(username, password) {
-        console.log(username);
-        console.log(password);
+        console.log(`Username: ${username}, Password: ${password}`);
     }
 
     return (

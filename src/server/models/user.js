@@ -30,6 +30,6 @@ userSchema.pre('save', function(next) {
         this.nick = this.get('username');
     }
     next();
-})
+});
 
 module.exports = mongoose.model('User', userSchema);
