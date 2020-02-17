@@ -1,6 +1,5 @@
 const initialState = {
-    user_id: null,
-    nick: null,
+    loggedIn: localStorage.getItem('user_nick'),
     error: null,
     loading: false
 };
@@ -12,9 +11,9 @@ const authReducer = (state = initialState, action) => {
         case "auth.ERROR":
             return { ...initialState, error: action.error };
         case "auth.SUCCESS":
-            return { ...initialState, user_id: action.payload.data.user_id, user_nick: action.payload.data.nick };
+            return { ...initialState, loggedIn: true};
         case "auth.LOGOUT":
-            return initialState;
+            return { ...initialState, loggedIn: null};
         default:
             return state;
     }

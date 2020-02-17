@@ -1,4 +1,6 @@
 {
+    "frontend-url": "http://127.0.0.1:3000",
+    "backend-url": "http://127.0.0.1:8080",
     "mongodb": {
         "url": "localhost",
         "port": 27017,
@@ -8,5 +10,12 @@
     },
     "jwt": {
         "expiration": 1440
+    },
+    "cors_path": [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000"
+    ],
+    "telegram": {
+        "baseUrl": "https://api.telegram.org/bot"
     }
 }

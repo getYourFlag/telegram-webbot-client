@@ -1,11 +1,11 @@
 import React from "react";
 import "../css/navbar.css";
-import { useSelector, useDispatch } from "react-redux";
-import { auth, logout } from "../actions/auth";
-import { Redirect } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../actions/auth";
 
 const NavBar = props => {
-  const isAuthed = useSelector(state => state.authReducer.user_nick);
+  const isAuthed = useSelector(state => state.authReducer.loggedIn);
+  const dispatch = useDispatch();
 
   return (
     <div className="navbar">
@@ -14,7 +14,7 @@ const NavBar = props => {
       </ul>
       <ul className="list-end">
         <li>
-          {isAuthed ? <a href="/#/logout">Logout</a> : <a href="/">Login</a>}
+          {isAuthed ? <a href="/" onClick={_ => dispatch(logout())}>Logout</a> : <a href="/">Login</a>}
         </li>
       </ul>
     </div>

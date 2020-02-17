@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import NavBar from "./components/NavBar";
 import Router from './components/Router';
-import ContentWrapper from "./components/ContentWrapper"
+import { useSelector, useDispatch } from "react-redux";
+import Login from './pages/LoginForm';
+import './css/navbar.css';
 
 const App = props => {
+  const isAuth = useSelector(state => state.authReducer.loggedIn);
+
   return (
     <React.Fragment>
       <NavBar />
-      <ContentWrapper>
-        <Router />
-      </ContentWrapper>
+      <div className = 'content'>
+        {isAuth ? <Router /> : <Login />}
+      </div>
     </React.Fragment>
   );
 };

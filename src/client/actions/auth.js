@@ -6,6 +6,8 @@ export const LOGOUT = 'auth.LOGOUT';
 export const ERROR = 'auth.ERROR';
 
 export const logout = () => {
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('user_nick');
     return { type: LOGOUT };
 };
 
@@ -24,8 +26,10 @@ export const authFail = err => {
 export const auth = (username, password) => {
     return dispatch => {
         dispatch(authenticate());
-        return axios.post('/user/login', {username, password}).then(data => {
-            dispatch(authSuccess(data))
+        return axios.post('/user/login', {username, password}).then(res => {
+            localStorage.setItem('user_nick', res.data.nick);
+            localStorage.setItem('user_id', res.data.user_id);
+            dispatch(authSuccess(res.data));
         })
         .catch(err => {
             dispatch(authFail(err));

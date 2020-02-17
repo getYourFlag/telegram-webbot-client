@@ -8,7 +8,7 @@ const LoginForm = props => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const isAuthed = useSelector(state => state.authReducer.user_nick);
+    const isAuthed = useSelector(state => state.authReducer.loggedIn);
     const isLoading = useSelector(state => state.authReducer.loading);
     const error = useSelector(state => state.authReducer.error);
     const dispatch = useDispatch();
@@ -44,7 +44,6 @@ const LoginForm = props => {
             <button onClick={_ => dispatch(auth(username, password))}>Login</button>
 
             {isLoading ? <p>Logging in ......</p> : null}
-            {isAuthed ? <p onClick={_ => dispatch(logout())}>You are logged in as {isAuthed}.</p> : null}
         </div>
     );
 };

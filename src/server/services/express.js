@@ -1,14 +1,13 @@
 const express = require("express");
 const app = express();
+const config = require("config");
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
 const webhook = require("../routes/webhook");
 const userRouter = require("../routes/a2_user");
 
 app.use(cors({
-    origin: [
-        'http://localhost:3000'
-    ],
+    origin: config.get('cors_path'),
     credentials: true
 }));
 app.use(express.json());
