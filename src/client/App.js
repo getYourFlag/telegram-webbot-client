@@ -11,9 +11,7 @@ const App = props => {
   return (
     <React.Fragment>
       <NavBar />
-      <div className = 'content'>
-        {isAuth ? <Router /> : <Login />}
-      </div>
+      {isAuth ? <Router /> : <Login />}
     </React.Fragment>
   );
 };

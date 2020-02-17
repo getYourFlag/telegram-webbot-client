@@ -1,9 +1,10 @@
 import authReducer from './auth';
-import channelListReducer from './channels';
+import botReducer from './bot';
+import chatReducer from './chat';
 import {combineReducers} from 'redux';
 
 const allReducers = combineReducers({
-    authReducer, channelListReducer
+    authReducer, botReducer, chatReducer
 });
 
 export default allReducers;
