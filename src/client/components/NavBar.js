@@ -1,7 +1,12 @@
 import React from "react";
 import "../css/navbar.css";
+import { useSelector, useDispatch } from "react-redux";
+import { auth, logout } from "../actions/auth";
+import { Redirect } from 'react-router-dom'
 
 const NavBar = props => {
+  const isAuthed = useSelector(state => state.authReducer.user_nick);
+
   return (
     <div className="navbar">
       <ul className="list-start">
@@ -9,7 +14,7 @@ const NavBar = props => {
       </ul>
       <ul className="list-end">
         <li>
-          <a href="/login">Login</a>
+          {isAuthed ? <a href="/#/logout">Logout</a> : <a href="/">Login</a>}
         </li>
       </ul>
     </div>

@@ -1,0 +1,12 @@
+{
+    "mongodb": {
+        "url": "localhost",
+        "port": 27017,
+        "db_name": "tgwebbot",
+        "db_user": "",
+        "db_pw": ""
+    },
+    "jwt": {
+        "expiration": 1440
+    }
+}

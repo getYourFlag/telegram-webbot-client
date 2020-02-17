@@ -1,8 +1,18 @@
+require("dotenv").config();
+const config = require("config");
 const app = require("./services/express");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 8080;
 
-mongoose.connect("mongodb://127.0.0.1/tgwebbot", {
+const dbUrl =
+    "mongodb://" +
+    config.get("mongodb.url") +
+    ":" +
+    config.get("mongodb.port") +
+    "/" +
+    config.get("mongodb.db_name");
+
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

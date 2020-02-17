@@ -32,12 +32,13 @@
 .navbar ul li a {
     display: block;
     text-decoration: none;
+    color: white;
 }
 
 .navbar ul li a:hover,
 .navbar ul li a:active {
     cursor: pointer;
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid white;
     animation: 0.2s ease-out;
 }
 
@@ -106,7 +107,6 @@
     margin: 0 auto;
     text-align: center;
     white-space: nowrap;
-    vertical-align: middle;
 
     user-select: none;
     border: 1px solid transparent;
@@ -124,4 +124,14 @@
     cursor: pointer;
     background-color:#1e7e34;
     border-color:#1c7430;
+}
+
+.login-error {
+    padding: 0.5rem 1rem;
+    background-color: pink;
+    margin-bottom: 1rem;
+}
+
+.login-error p {
+    color: red;
 }
