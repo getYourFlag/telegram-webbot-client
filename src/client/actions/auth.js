@@ -26,7 +26,7 @@ export const authFail = err => {
 export const auth = (username, password) => {
     return dispatch => {
         dispatch(authenticate());
-        return axios.post('/user/login', {username, password}).then(res => {
+        return axios.post('/users/login', {username, password}).then(res => {
             localStorage.setItem('user_nick', res.data.nick);
             localStorage.setItem('user_id', res.data.user_id);
             dispatch(authSuccess(res.data));

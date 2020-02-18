@@ -19,7 +19,7 @@ export const botListError = data => {
 export const fetchBotList = () => {
     return dispatch => {
         dispatch(loadingBotList());
-        return axios.get('/bot/list').then(res => {
+        return axios.get('/bots/list').then(res => {
             dispatch(botListSuccess(res.data));
         })
         .catch(err => {

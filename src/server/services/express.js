@@ -8,7 +8,8 @@ const webhook = require("../routes/9s_webhook");
 const chatRouter = require("../routes/9s_chat");
 const chatManageRouter = require("../routes/a2_chat");
 const botRouter = require("../routes/a2_bot");
-const sendRouter = require("../routes/2b_send");
+const messageRouter = require('../routes/9s_message');
+const sendMsgRouter = require("../routes/2b_message");
 
 app.use(cors({
     origin: config.get('cors_path'),
@@ -21,11 +22,12 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
     res.send("Hello Express!");
 });
-app.use("/user", userRouter);
+app.use("/users", userRouter);
 app.use("/receive", webhook);
 app.use("/chats", chatRouter);
 app.use("/chatmgmt", chatManageRouter);
-app.use("/bot", botRouter);
-app.use("/send", sendRouter);
+app.use("/bots", botRouter);
+app.use('/messages', messageRouter);
+app.use("/send", sendMsgRouter);
 
 module.exports = app;

@@ -11,15 +11,15 @@ const chatReducer = (state = initialState, action) => {
         case "chat.FETCHING":
             return {...state, loading: true};
         case "chat.FETCH_FAIL":
-            return {...state, chats: null, error: action.payload};
+            return {...state, loading: false, chats: null, error: action.payload};
         case "chat.FETCH_SUCCESS":
-            return {...state, chats: action.payload.chats, error: null, currentBot: action.payload.bot};
+            return {...state, loading: false, chats: action.payload.chats, error: null, currentBot: action.payload.bot};
         case "chat.DELETE":
             state.chats.splice(state.chats.indexOf(action.payload));
-            return {...state, chats: state.chats, action: 'DELETE'}
+            return {...state, loading: false, chats: state.chats, action: 'DELETE'}
         case "chat.ARCHIVE":
             state.chats.splice(state.chats.indexOf(action.payload));
-            return {...state, chats: state.chats, action: 'ARCHIVE'}
+            return {...state, loading: false, chats: state.chats, action: 'ARCHIVE'}
         default:
             return state;
     }
