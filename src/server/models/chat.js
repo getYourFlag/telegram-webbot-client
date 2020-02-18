@@ -3,12 +3,14 @@ const Schema = mongoose.Schema;
 
 const chatSchema = new Schema({
     tg_id: {type: Number, required: true},
-    type: String,
+    type: {type: String, default: 'private'},
     user_id: {type: Number},
-    shown_name: String,
     username: String,
     title: {type: String, required: true},
-    bot_id: {type: mongoose.Schema.Types.ObjectId, ref: 'bot'},
+    bot_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Bot'},
+    latest_message: {type: mongoose.Schema.Types.ObjectId, ref: 'Message'},
+    latest_update: {type: Date, default: Date.now()},
+    archived: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model('Chat', chatSchema);

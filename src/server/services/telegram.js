@@ -1,14 +1,16 @@
-import axios from 'axios';
-import config from 'config';
-const baseUrl = config('telegram.baseUrl');
+const axios = require('axios');
+const config = require('config');
+const baseUrl = config.get('telegram.baseUrl');
 
 const getUrl = (method, token) => baseUrl + token + '/' + method;
 
-export const sendMessage = async (token, data) => {
+const sendMessage = (token, data) => {
     data = {...data, parse_mode: 'markdown'}
-    try {
-        return await axios.post(getUrl('sendMessage', token), data)
-    } catch (e) {
-        return e;
-    }
+    const url = getUrl('sendMessage', token);
+    console.log(url);
+    return axios.post(url, data);
+}
+
+module.exports = {
+    sendMessage
 }
