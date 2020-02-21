@@ -3,31 +3,44 @@ const express = require("express");
 const router = express.Router();
 const axios = require('axios');
 const Chat = require('../models/chat');
+const Bot = require('../models/bot');
 const Message = require('../models/message')
 const telegram = require( '../services/telegram');
 
 function updateDbForNewMsg(message) {
-    return function() {
-        Message.create({
-            message_id: message.message_id,
-            ref_chat_id: message.ref_chat_id,
-            text: message.text,
-            date: message.date,
+    const result = message.result;
+    return async function() {
+        const chat = await Chat.findOne({tg_id: result.chat.id});
+        const newMessage = await Message.create({
+            message_id: result.message_id,
+            ref_chat_id: chat._id,
+            text: result.text,
+            date: result.date * 1000,
             fromUs: true,
             success: true
-        }).then(newMessage => {
-            Chat.findByIdAndUpdate(ref_chat_id, {latest_message: newMessage.data._id, latest_update: message.date});
         });
+        return Chat.findByIdAndUpdate(chat._id, {latest_message: newMessage._id, latest_update: result.date});
     }
 }
 
 router.post('/message', async (req, res) => {
-    const { text, ref_chat_id, bot_token } = req.body;
-    const chat_id = req.body.tg_id;
-    let result = await telegram.sendMessage(bot_token, { chat_id, text });
-
-    res.on('finish', updateDbForNewMsg(result.data));
-    res.status(200).send(resultData).end();
+    const { text, bot_id, chat_id } = req.body;
+    const currentBot = Bot.findById(bot_id);
+    const currentChat = Chat.findById(chat_id);
+    Promise.all([currentBot, currentChat]).then(values => {
+        const [bot, chat] = values;
+        if (!bot) return res.status(404).send({error: 'Bot not found', code: 1}).end();
+        if (!chat) return res.status(404).send({error: 'Chat not found', code: 2}).end();
+        return telegram.sendMessage(bot.token, { chat_id: chat.tg_id, text })
+            .then(result => {
+                res.on('finish', updateDbForNewMsg(result.data));
+                return res.status(200).send(result.data).end();
+            })
+            .catch(error => {
+                console.error(error);
+                return res.status(500).send(error).end();
+            });
+    });
 });
 
 module.exports = router;

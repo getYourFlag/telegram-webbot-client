@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Chat = require('../models/chat');
+const Message = require('../models/message');
 const authMiddleware = require('../middleware/auth');
 const mongoose = require('mongoose');
 
@@ -26,6 +27,20 @@ router.get('/archived/:botId', (req, res) => {
         .catch(err => {
             res.status(500).send(err);
         });
+});
+
+router.get('/updates', (req, res) => {
+    let time = req.params.time || Date.now() - 600000;
+    time = Math.floor(time / 1000);
+
+    Message.find({ date: { $gte: time }})
+        .then(data => {
+            res.status(200).send(data);
+        })
+        .catch(err => {
+            res.status(500).send(err);
+        });
+    
 });
 
 module.exports = router;

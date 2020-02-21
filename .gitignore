@@ -6,3 +6,4 @@ npm-debug.log*
 .npm/
 yarn.lock
 .env
+ngrok.exe

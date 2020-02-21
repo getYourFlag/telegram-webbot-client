@@ -46,4 +46,35 @@ router.get('/removeWebhook/:id', authMiddleware(128), async (req, res) => {
         .catch(err => res.status(500).send(err));
 });
 
+router.get('/resetWebhooks', authMiddleware(255), async (req, res) => {
+    let backendUrl = config.get('backend-url');
+    if (req.params.backendUrl) backendUrl = req.params.backendUrl;
+
+    let bots = await Bot.find();
+    let deleteWebhooks = bots.map(bot => axios.get(config.get('telegram.baseUrl') + bot.token + '/deleteWebhook'));
+
+    Promise.all(deleteWebhooks).then(_ => {
+        bots = bots.map(bot => axios.post(config.get('telegram.baseUrl') + bot.token + '/setWebhook', {
+            'url': backendUrl + '/receive/' + bot.token
+        }));
+        return Promise.all(bots);
+    }).then(values => {
+        values = values.map(value => value.data);
+        return res.status(200).send(values).end();
+    }).catch(err => {
+        console.log(`Error in reseting webhooks.`);
+        console.log(err);
+        return res.status(500).send("Error in reseting webhook, please refer to console for error log.").end();
+    });
+});
+
+router.get('/webhookInfo', authMiddleware(255), async (req, res) => {
+    let bots = await Bot.find();
+    bots = bots.map(bot => axios.get(config.get('telegram.baseUrl') + bot.token + '/getWebhookInfo'));
+    Promise.all(bots).then(values => {
+        values = values.map(value => value.data.result);
+        return res.status(200).send(values).end();
+    });
+});
+
 module.exports = router;

@@ -1,18 +1,20 @@
 const initialState = {
-    loading: false,
     error: null,
-    messages: null,
-    action: null
+    messages: [],
+    action: null,
+    currentChat: null
 }
 
 const messageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "messages.FETCHING":
-            return {...state, loading: true};
-        case "messages.FETCH_FAIL":
-            return {...state, loading: false, messages: null, error: action.payload};
-        case "messages.FETCH_SUCCESS":
-            return {...state, loading: false, messages: action.payload, error: null};
+        case "message.FETCH_FAIL":
+            return {...state, loading: false, messages: [], error: action.payload, currentChat: action.chatId};
+        case "message.FETCH_SUCCESS":
+            return {...state, loading: false, messages: action.payload, error: null, currentChat: action.chatId};
+        case "message.APPEND":
+            messages = state.messages;
+            messages.push(action.payload);
+            return {...state, messages: messages}
         default:
             return state;
     }
