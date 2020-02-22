@@ -17,5 +17,9 @@
     ],
     "telegram": {
         "baseUrl": "https://api.telegram.org/bot"
+    },
+    "updates": {
+        "autoUpdate": true,
+        "updateInterval": 25000
     }
 }

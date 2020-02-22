@@ -18,5 +18,15 @@ router.get('/:chatId', (req, res) => {
         });
 });
 
+router.post('/update', (req, res) => {
+    let {time, chatId} = req.body;
+    Message.find({ date: { $gte: time }, ref_chat_id: chatId, fromUs: false})
+        .then(data => {
+            res.status(200).send(data);
+        })
+        .catch(err => {
+            res.status(500).send(err);
+        });
+});
 
 module.exports = router;

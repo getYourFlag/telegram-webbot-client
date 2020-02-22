@@ -7,20 +7,22 @@ const Bot = require('../models/bot');
 const Message = require('../models/message')
 const telegram = require( '../services/telegram');
 
-function updateDbForNewMsg(message) {
+async function updateDbForNewMsg(message) {
     const result = message.result;
-    return async function() {
-        const chat = await Chat.findOne({tg_id: result.chat.id});
-        const newMessage = await Message.create({
-            message_id: result.message_id,
-            ref_chat_id: chat._id,
-            text: result.text,
-            date: result.date * 1000,
-            fromUs: true,
-            success: true
-        });
-        return Chat.findByIdAndUpdate(chat._id, {latest_message: newMessage._id, latest_update: result.date});
-    }
+    const date = result.date * 1000;
+    let chat = await Chat.findOne({tg_id: result.chat.id});
+    const newMessage = await Message.create({
+        message_id: result.message_id,
+        ref_chat_id: chat._id,
+        text: result.text,
+        date: date,
+        fromUs: true,
+        success: true
+    });
+    chat.latest_message = newMessage._id;
+    chat.latest_update = date;
+    chat.save();
+    return newMessage;
 }
 
 router.post('/message', async (req, res) => {
@@ -31,15 +33,13 @@ router.post('/message', async (req, res) => {
         const [bot, chat] = values;
         if (!bot) return res.status(404).send({error: 'Bot not found', code: 1}).end();
         if (!chat) return res.status(404).send({error: 'Chat not found', code: 2}).end();
-        return telegram.sendMessage(bot.token, { chat_id: chat.tg_id, text })
-            .then(result => {
-                res.on('finish', updateDbForNewMsg(result.data));
-                return res.status(200).send(result.data).end();
-            })
-            .catch(error => {
-                console.error(error);
-                return res.status(500).send(error).end();
-            });
+        return telegram.sendMessage(bot.token, { chat_id: chat.tg_id, text });
+    }).then(tgRes => {
+        return updateDbForNewMsg(tgRes.data);
+    }).then(msg => res.status(200).send(msg).end()
+    ).catch(error => {
+        console.error(error);
+        return res.status(500).send(error).end();
     });
 });
 

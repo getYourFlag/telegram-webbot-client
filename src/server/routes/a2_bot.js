@@ -48,7 +48,8 @@ router.get('/removeWebhook/:id', authMiddleware(128), async (req, res) => {
 
 router.get('/resetWebhooks', authMiddleware(255), async (req, res) => {
     let backendUrl = config.get('backend-url');
-    if (req.params.backendUrl) backendUrl = req.params.backendUrl;
+    if (req.query.backendUrl) backendUrl = req.query.backendUrl;
+    console.log(backendUrl);
 
     let bots = await Bot.find();
     let deleteWebhooks = bots.map(bot => axios.get(config.get('telegram.baseUrl') + bot.token + '/deleteWebhook'));

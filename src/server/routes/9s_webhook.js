@@ -45,15 +45,15 @@ router.post('/:token', async (req, res) => {
         update_id: req.body.update_id, 
         message_id: message.message_id,
         ref_chat_id: chat._id,
-        date: message.date,
+        date: date,
         text: text,
         fromUs: false,
         success: true
     });
     chat.latest_message = msg._id;
     chat.date = date;
+    chat.save();
 
-    res.on('finish', _ => chat.save());
     res.status(200).send(msg).end();
 });
 

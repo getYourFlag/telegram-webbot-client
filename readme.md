@@ -20,7 +20,7 @@ If you have the following demand, this client is for you:
 Due to the nature of Telegram Bot API, this web client could not do the followings:
 
 * Initiating a chat with Telegram users or entering a group. You could only send messages to a user after they had started conversation with a bot.
-* Subscribing to a channel. Channel messages were only available if the bot was an admin (regardless of permission level).
+* Subscribing to a channel. Channel messages are only available if the bot is the channel's admin.
 * Storing media in Telegram Cloud servers, bots only have a limited time of storage on the server (according to the official docs).
 
 ## Installation
@@ -28,6 +28,9 @@ Due to the nature of Telegram Bot API, this web client could not do the followin
 You need to have node, npm and a web server of you choice (nginx is recommended) installed on the server before deploying the web client.
 
 1. Clone the git repository and install dependencies
-`git clone https://github.com/getYourFlag/telegram-webbot-client`
-`cd telegram-webbot-client`
-`npm install`
+
+```javascript
+git clone https://github.com/getYourFlag/telegram-webbot-client
+cd telegram-webbot-client
+npm install
+```

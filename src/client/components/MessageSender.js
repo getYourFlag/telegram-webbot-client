@@ -8,7 +8,7 @@ const MessageSender = props => {
     const dispatch = useDispatch();
 
     return (<div className='message-sender'>
-        <input type='text' name='message' onChange={e => setInputText(e.target.value)}></input>
+        <input type='text' name='message' value={inputText} onChange={e => setInputText(e.target.value)}></input>
         <button className='send-button' onClick={_ => {
             dispatch(sendMessages({
                 text: inputText,

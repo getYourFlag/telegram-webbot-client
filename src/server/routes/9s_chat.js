@@ -29,18 +29,18 @@ router.get('/archived/:botId', (req, res) => {
         });
 });
 
-router.get('/updates', (req, res) => {
-    let time = req.params.time || Date.now() - 600000;
-    time = Math.floor(time / 1000);
-
-    Message.find({ date: { $gte: time }})
+router.get('/update', (req, res) => {
+    let {time, bot_id} = req.query;
+    Chat.find({ bot_id, latest_update: { $gte: time }})
+        .populate('latest_message')
+        .sort([['latest_update', -1]])
         .then(data => {
             res.status(200).send(data);
         })
         .catch(err => {
+            console.log(err);
             res.status(500).send(err);
         });
-    
 });
 
 module.exports = router;
