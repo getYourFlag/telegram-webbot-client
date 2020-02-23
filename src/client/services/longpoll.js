@@ -26,7 +26,6 @@ export const removeChatUpdate = _ => {
 }
 
 export const setMessageUpdate = chatId => {
-    console.log(chatId);
     if (updateStatus === null || chatId === null) return null;
     updateChatId = chatId;
     clearInterval(updateFnId);

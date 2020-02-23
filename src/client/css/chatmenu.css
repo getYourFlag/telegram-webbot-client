@@ -18,6 +18,17 @@
 .chat-selector p {
     margin: 0.5rem 0;
 }
+.chat-selector .chat-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: black;
+    text-overflow: ellipsis;
+}
+.chat-selector .chat-time {
+    font-size: 0.8rem;
+    color: darkslategray;
+    float: right;
+}
 
 .chat-selector:hover,
 .chat-selector:active {
@@ -26,11 +37,6 @@
     transition: 0.2s ease-out;
 }
 
-.chat-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: black;
-}
 
 .chat-dialog {
     font-size: 1rem;

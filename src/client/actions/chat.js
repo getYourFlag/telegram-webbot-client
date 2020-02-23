@@ -49,10 +49,9 @@ export const deleteChat = chatId => {
     }
 }
 
-export const updateChat = bot => {
+export const updateChat = bot_id => {
     return (dispatch, getState) => {
         const time = getState().chatReducer.lastUpdate;
-        const bot_id = bot._id
         return axios.get('/chats/update', {params: {time, bot_id}}).then(res => {
             dispatch(chatUpdated(res.data));
         })

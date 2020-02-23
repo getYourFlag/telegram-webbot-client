@@ -9,7 +9,7 @@ const chatSchema = new Schema({
     title: {type: String, required: true},
     bot_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Bot'},
     latest_message: {type: mongoose.Schema.Types.ObjectId, ref: 'Message'},
-    latest_update: {type: Date, default: Date.now()},
+    latest_update: {type: Number, default: Date.now()},
     archived: {type: Boolean, default: false}
 });
 

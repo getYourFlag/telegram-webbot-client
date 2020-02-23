@@ -24,6 +24,20 @@ const getUpdatedChats = (original, updates) => {
     return newChats;
 }
 
+const updateAfterSent = (chats, message) => {
+    let newChats = JSON.parse(JSON.stringify(chats));
+
+    for (let chat of newChats) {
+        if (chat._id === message.ref_chat_id) {
+            chat.latest_message = message;
+            chat.latest_update = message.date;
+            break;
+        }
+    }
+    newChats.sort((a, b) => b.latest_update - a.latest_update);
+    return newChats;
+}
+
 const chatReducer = (state = initialState, action) => {
     let chats;
     switch (action.type) {
@@ -39,6 +53,9 @@ const chatReducer = (state = initialState, action) => {
         case "chat.UPDATE":
             if (action.payload.length === 0) return state;
             chats = getUpdatedChats(state.chats, action.payload);
+            return {...state, chats: chats, lastUpdate: Date.now()}
+        case "chat.UPDATE_AFTER_SENT":
+            chats = updateAfterSent(state.chats, action.payload);
             return {...state, chats: chats, lastUpdate: Date.now()}
         default:
             return state;

@@ -1,14 +1,12 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
 const Chat = require('../models/chat');
 const Message = require('../models/message');
 const authMiddleware = require('../middleware/auth');
-const mongoose = require('mongoose');
 
 router.use(authMiddleware());
 
 router.get('/bot/:botId', (req, res) => {
-    Chat.find({bot_id: mongoose.Types.ObjectId(req.params.botId), archived: false})
+    Chat.find({bot_id: req.params.botId, archived: false})
         .populate('latest_message')
         .sort([['latest_update', -1]])
         .then(data => {
@@ -20,7 +18,7 @@ router.get('/bot/:botId', (req, res) => {
 });
 
 router.get('/archived/:botId', (req, res) => {
-    Chat.find({bot_id: mongoose.Types.ObjectId(req.params.botId), archived: true})
+    Chat.find({bot_id: req.params.botId, archived: true})
         .then(data => {
             res.status(200).send(data);
         })
@@ -33,8 +31,8 @@ router.get('/update', (req, res) => {
     let {time, bot_id} = req.query;
     Chat.find({ bot_id, latest_update: { $gte: time }})
         .populate('latest_message')
-        .sort([['latest_update', -1]])
         .then(data => {
+            data = data.sort((a, b) => b.latest_update - a.latest_update);
             res.status(200).send(data);
         })
         .catch(err => {

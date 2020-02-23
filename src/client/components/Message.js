@@ -3,6 +3,7 @@ import React, {useEffect, useRef} from 'react';
 const Message = props => {
     let className = 'chat-message';
     if (props.message.fromUs) className += ' own-message';
+    if (props.message.isSystemMessage) className = 'system-message';
 
     const messageRef = useRef(null);
 
@@ -12,10 +13,19 @@ const Message = props => {
         }
     }, [props.scrollTarget]);
 
+    let date = props.message.date;
+    date = new Date(date).toLocaleDateString(undefined, {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+
     return (
     <div className={className} ref={messageRef}>
         <p className = 'message-text'>{props.message.text}</p>
-        <p className = 'message-date'>{props.message.date}</p>
+        <p className = 'message-date'>{date}</p>
     </div>
     );
 }

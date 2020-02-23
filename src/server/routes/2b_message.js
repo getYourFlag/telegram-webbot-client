@@ -1,7 +1,4 @@
-const config = require('config');
-const express = require("express");
-const router = express.Router();
-const axios = require('axios');
+const router = require("express").Router();
 const Chat = require('../models/chat');
 const Bot = require('../models/bot');
 const Message = require('../models/message')
@@ -19,9 +16,7 @@ async function updateDbForNewMsg(message) {
         fromUs: true,
         success: true
     });
-    chat.latest_message = newMessage._id;
-    chat.latest_update = date;
-    chat.save();
+    await Chat.updateOne({_id: chat._id}, {$set: {latest_message: newMessage._id, latest_update: date}});
     return newMessage;
 }
 

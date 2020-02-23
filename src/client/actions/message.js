@@ -23,7 +23,7 @@ export const fetchMessages = chatId => {
     }
 }
 
-export const updateMessages = (chatId, lastUpdate) => {
+export const updateMessages = chatId => {
     return (dispatch, getState) => {
         const data = {
             'time': getState().messageReducer.lastUpdate,

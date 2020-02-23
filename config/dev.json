@@ -20,6 +20,6 @@
     },
     "updates": {
         "autoUpdate": true,
-        "updateInterval": 25000
+        "updateInterval": 5000
     }
 }

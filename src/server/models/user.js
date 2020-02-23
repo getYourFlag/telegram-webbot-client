@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     username: { type: String, required: true, dropUps: true },
-    password: { type: String, required: true },
+    password: { type: String, required: true, select: false },
     nick: { type: String, dropUps: true },
     last_login: { type: Date, default: Date.now },
     permission: { type: Number, min: 0, max: 255 }

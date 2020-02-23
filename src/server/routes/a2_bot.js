@@ -1,7 +1,6 @@
 require('dotenv').config();
 const config = require('config');
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
 const authMiddleware = require('../middleware/auth');
 const Bot = require('../models/bot');
 const axios = require('axios');
@@ -27,9 +26,8 @@ router.get('/removeBot/:id', authMiddleware(128), (req, res) => {
 
 router.get('/setWebhook/:id', authMiddleware(128), async (req, res) => {
     const bot = await Bot.findById(req.params.id);
-    const token = bot.token;
-    axios.post(config.get('telegram.baseUrl') + token + '/setWebhook', {
-        'url': config.get('backend-url') + '/receive/' + token
+    axios.post(config.get('telegram.baseUrl') + bot.token + '/setWebhook', {
+        'url': config.get('backend-url') + '/receive/' + bot._id
     })
         .then(resData => res.status(200).send(resData.data))
         .catch(err => {
@@ -40,8 +38,7 @@ router.get('/setWebhook/:id', authMiddleware(128), async (req, res) => {
 
 router.get('/removeWebhook/:id', authMiddleware(128), async (req, res) => {
     const bot = await Bot.findById(req.params.id);
-    const token = bot.token;
-    axios.get(config.get('telegram.baseUrl') + token + '/removeWebhook')
+    axios.get(config.get('telegram.baseUrl') + bot.token + '/removeWebhook')
         .then(resData => res.status(200).send(resData.data))
         .catch(err => res.status(500).send(err));
 });
@@ -49,14 +46,13 @@ router.get('/removeWebhook/:id', authMiddleware(128), async (req, res) => {
 router.get('/resetWebhooks', authMiddleware(255), async (req, res) => {
     let backendUrl = config.get('backend-url');
     if (req.query.backendUrl) backendUrl = req.query.backendUrl;
-    console.log(backendUrl);
 
     let bots = await Bot.find();
     let deleteWebhooks = bots.map(bot => axios.get(config.get('telegram.baseUrl') + bot.token + '/deleteWebhook'));
 
     Promise.all(deleteWebhooks).then(_ => {
         bots = bots.map(bot => axios.post(config.get('telegram.baseUrl') + bot.token + '/setWebhook', {
-            'url': backendUrl + '/receive/' + bot.token
+            'url': backendUrl + '/receive/' + bot._id
         }));
         return Promise.all(bots);
     }).then(values => {

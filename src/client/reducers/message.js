@@ -7,6 +7,18 @@ const initialState = {
     lastUpdate: Date.now(),
 }
 
+const getUpdatedMessages = (original, updates) => {
+    let newMessages = JSON.parse(JSON.stringify(original));
+    let newMessageIDs = newMessages.map(v => v._id);
+    for (let update of updates) {
+        if (newMessageIDs.indexOf(update._id) === -1) {
+            newMessages.push(update);
+        }
+    }
+    return newMessages;
+}
+
+
 const messageReducer = (state = initialState, action) => {
     let messages;
     switch (action.type) {
@@ -20,7 +32,7 @@ const messageReducer = (state = initialState, action) => {
             return {...state, messages: messages}
         case "message.UPDATE":
             if (action.payload.length === 0) return state;
-            messages = JSON.parse(JSON.stringify(state.messages)).concat(action.payload);
+            messages = getUpdatedMessages(state.messages, action.payload)
             return {...state, messages: messages, lastUpdate: Date.now()}
         default:
             return state;

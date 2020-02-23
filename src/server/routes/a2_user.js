@@ -1,13 +1,11 @@
 require('dotenv').config();
-const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-const router = express.Router();
+const router = require("express").Router();
 const authMiddleware = require('../middleware/auth');
 
-router.use("/register", authMiddleware(255));
-router.post("/register", async function(req, res) {
+router.post("/register", authMiddleware(255), async function(req, res) {
     const {username, nick, permission, password} = req.body;
     password = await bcrypt.hash(password, 10);
 
@@ -17,7 +15,7 @@ router.post("/register", async function(req, res) {
 
 router.post("/login", async function(req, res) {
     const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username }).select('+password');
     if (!user) {
         return res
             .status(401)
@@ -51,12 +49,8 @@ router.post("/login", async function(req, res) {
         .status(200).send({user_id: user._id, nick: user.nick});
 });
 
-router.use('/test', authMiddleware());
-router.get('/test', function(req, res) {
-    return res.status(200).send({
-        nick: req.user.nick,
-        message: "Successful access to protected route!"
-    });
+router.get('/me', authMiddleware(), function(req, res) {
+    User.findOne({nick: req.user.nick}).then(user => res.status(200).send(user).end());
 })
 
 module.exports = router;

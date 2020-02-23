@@ -24,15 +24,24 @@
     margin: 0 0 0.5rem 0;
 }
 .chat-message .message-date {
-    color: gray;
+    color: darkslategray;
     margin: 0;
     font-size: 0.8rem;
     text-align: right;
 }
-
 .chat-message.own-message {
     margin-left: auto;
     background-color: lightgreen;
+}
+
+.system-message {
+    display: block;
+    width: auto;
+    text-align: center;
+    color: darkslategray;
+}
+.system-message .message-date {
+    display: none;
 }
 
 .chat-input {

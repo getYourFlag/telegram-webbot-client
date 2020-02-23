@@ -1,60 +1,51 @@
-const express = require("express");
-const router = express.Router();
+const router = require('express').Router();
 const Message = require('../models/message');
 const Chat = require('../models/chat');
 const Bot = require('../models/bot');
 const telegramSpecials = require('../../../config/tgmgmt.json');
 
-router.post('/:token', async (req, res) => {
-    const token = req.params.token;
-    const bot = await Bot.findOne({token: token});
-    if (!bot) {
-        // Cease future mesages.
-        // TODO: Add Error Logging.
-        return res.status(200).end();
-    }
-    
+router.post('/:botId', async (req, res) => {
+    const botId = req.params.botId;
     let message = req.body.message || req.body.channel_post;
 
     const date = message.date * 1000;
     const chat_id = message.chat.id;
-    const text = message.text;
+    let text = message.text;
+    let isSystemMessage = false;
 
-    let chat = await Chat.findOne({tg_id: chat_id});
-    if (!chat) {
-        chat = await Chat.create({
-            tg_id: chat_id,
-            type: message.from ? 'private' : 'channel',
-            user_id: message.from ? message.from.id : chat_id, 
-            username: message.from ? message.from.username : message.chat.title,
-            title: message.from ?  (message.from.first_name + ' ' + message.from.last_name).trim() : message.chat.title.trim(),
-            bot_id: bot._id,
-        });
+    const chatUpdate = {
+        tg_id: chat_id,
+        type: message.from ? 'private' : 'channel',
+        user_id: message.from ? message.from.id : chat_id, 
+        username: message.from ? message.from.username : message.chat.title,
+        title: message.from ?  (message.from.first_name + ' ' + message.from.last_name).trim() : message.chat.title.trim(),
+        bot_id: botId,
     }
+    let chat = await Chat.findOneAndUpdate({tg_id: chat_id}, chatUpdate, {new: true, upsert: true});
 
     if (!text) {
-        for (key in Object.keys(telegramSpecials)) {
+        for (key of Object.keys(telegramSpecials)) {
+            console.log(key);
             if (message[key]) {
                 text = telegramSpecials[key].replace('$', message[key]);
+                isSystemMessage = true;
                 break;
             }
         }
     }
 
-    let msg = await Message.create({
+    let newMessage = await Message.create({
         update_id: req.body.update_id, 
         message_id: message.message_id,
         ref_chat_id: chat._id,
         date: date,
         text: text,
         fromUs: false,
-        success: true
+        success: true,
+        isSystemMessage
     });
-    chat.latest_message = msg._id;
-    chat.date = date;
-    chat.save();
-
-    res.status(200).send(msg).end();
+    await Chat.updateOne({_id: chat._id}, {$set: {latest_message: newMessage._id, latest_update: date}});
+    res.status(200).send(newMessage).end();
 });
 
 
