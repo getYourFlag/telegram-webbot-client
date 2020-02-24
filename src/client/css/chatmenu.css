@@ -1,5 +1,4 @@
 .chat-menu {
-    width: 20%;
     min-height: 100%;
     padding: 0 0.5rem;
     border-right: 3px solid lightgray;
@@ -53,16 +52,4 @@
     margin: 0;
     text-align: center;
     border-bottom: 1px dotted darkslategray;
-}
-
-@media(max-width: 992px) {
-    .chat-menu {
-        width: 30%;
-    }
-}
-
-@media(max-width: 767px) {
-    .chat-menu {
-        width: 35%;
-    }
 }

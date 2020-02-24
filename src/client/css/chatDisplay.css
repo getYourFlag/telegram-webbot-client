@@ -1,5 +1,4 @@
 .chat-display {
-    width: 80%;
     max-height: calc(100vh - 3rem);
     margin: 0;
 }

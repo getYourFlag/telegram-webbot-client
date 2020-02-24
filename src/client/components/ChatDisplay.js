@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import MessageSender from './MessageSender';
 import Message from './Message';
-// import {updateMessages} from '../actions/message';
 import {setMessageUpdate, removeMessageUpdate} from '../services/longpoll';
+import { Grid, Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 const ChatDisplay = props => {
     const messages = useSelector(state => state.messageReducer.messages);
