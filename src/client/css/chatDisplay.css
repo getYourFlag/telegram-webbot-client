@@ -5,6 +5,7 @@
 
 .chat-container {
     height: calc(100vh - 10rem);
+    width: 100%;
     overflow-y: scroll;
 }
 
