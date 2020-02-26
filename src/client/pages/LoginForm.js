@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../css/navbar.css";
-import "../css/content.css";
 import { useSelector, useDispatch } from "react-redux";
 import { auth } from "../actions/auth";
 import {Redirect} from 'react-router-dom';
