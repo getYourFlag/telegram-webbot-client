@@ -1,8 +1,0 @@
-{
-    "new_chat_members": "$ has joined the group.",
-    "left_chat_member": "$ has left the group.",
-    "new_chat_title": "Chat title changed to $",
-    "new_chat_photo": "Chat Photo Updated",
-    "delete_chat_photo": "Chat Photo Deleted",
-    "pinned_message": "A message has been pinned"
-}

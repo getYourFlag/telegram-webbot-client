@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import {Box} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
+import config from '../../../config/dev.json';
 
 const useStyles = makeStyles(({
     message: {
@@ -20,6 +21,8 @@ const useStyles = makeStyles(({
             'sans-serif'
         ],
         margin: '0.5rem',
+        lineClamp: 2,
+        textOverflow: 'ellipsis'
     },
     date: {
         fontSize: '0.8rem',
@@ -35,6 +38,13 @@ const useStyles = makeStyles(({
         backgroundColor: '#a5d6a7',
         borderColor: '#75a478',
         marginLeft: 'auto'
+    },
+    media: {
+        display: 'block',
+        maxWidth: '90%',
+        maxHeight: '30vh',
+        marginLeft: 'auto',
+        marginRight: 'auto'
     }
 }));
 
@@ -42,7 +52,6 @@ const Message = props => {
     let palette = props.message.fromUs ? 'sentMessage' : 'incomingMessage';
     const classes = useStyles();
     const messageRef = useRef(null);
-
     const className = `${classes.message} ${classes[palette]}`
 
     useEffect(_ => {
@@ -51,17 +60,40 @@ const Message = props => {
         }
     }, [props.scrollTarget]);
 
-    let date = props.message.date;
-    date = new Date(date).toLocaleDateString(undefined, {
+    let date = new Date(props.message.date).toLocaleDateString(undefined, {
         day: 'numeric',
         month: 'numeric',
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit'
     });
+    let media = null;
+    if (props.message.media_link) {
+        let mediaLink = config['backend-url'] + props.message.media_link
+        switch (props.message.media_type) {
+            case 'video':
+                media = (
+                    <video controls className={classes.media}>
+                        <source src={mediaLink} type="video/mp4" />
+                        Sorry, your browser does not support HTML5 Video Tag.
+                    </video>
+                );
+                break;
+            case 'audio':
+            case 'voice':
+                media = (
+                    <audio controls src={mediaLink} className={classes.media}>Sorry, your browser does not support HTML5 Audio Tag.</audio>
+                );
+                break;
+            case 'photo':
+            default:
+                media = <img src={mediaLink} className={classes.media}/>
+        }
+    }
 
     return (
     <Box className={className} ref={messageRef}>
+        {media}
         <p className={classes.text}>{props.message.text}</p>
         <p className={classes.date}>{date}</p>
     </Box>

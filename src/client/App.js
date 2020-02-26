@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "./components/NavBar";
 import Router from './components/Router';
 import { useSelector, useDispatch } from "react-redux";
-import { Grid } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Login from './pages/LoginForm';
 
@@ -24,14 +24,10 @@ const App = props => {
 
   return (
     <React.Fragment>
-      <Grid container spacing={0} direction="column" className={classes.root}>
-        <Grid item className={classes.navbar}>
-          <NavBar />
-        </Grid>
-        <Grid item className={classes.content}>
-          <Router />
-        </Grid>
-      </Grid>
+      <Box>
+        <NavBar />
+        <Router />
+      </Box>
     </React.Fragment>
   );
 };

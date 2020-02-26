@@ -7,6 +7,7 @@ const messageSchema = new Schema({
     ref_chat_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Chat'},
     text: String,
     media_link: String,
+    media_type: String,
     date: Number,
     fromUs: Boolean,
     success: Boolean,

@@ -30,6 +30,26 @@ const ChatMenu = props => {
         }
     }));
     const classes = useStyles();
+    const chatSelectors = chatList.map(chat => {
+        let dialog = '';
+        try {
+            dialog = chat.latest_message.text;
+        } catch (e) {}
+        if (chat.latest_message && !chat.latest_message.text && chat.latest_message.media_link) {
+            let mediaType = chat.latest_message.media_type.toUpperCase() || 'Media';
+            dialog = `${mediaType} Content`
+        }
+
+        return (
+            <Selector 
+                title={chat.title} 
+                dialog={dialog}
+                date={transformDate(chat.latest_update)}
+                key={chat._id}
+                getMessages={_ => dispatch(fetchMessages(chat._id))}
+            />
+        );
+    })
 
     return (
         <Box className={classes.root}>
@@ -38,14 +58,7 @@ const ChatMenu = props => {
                     {currentBot.name}
                 </Typography>
                 <Divider />
-                {chatList.map(chat => 
-                    <Selector 
-                        title={chat.title} 
-                        dialog={chat.latest_message ? chat.latest_message.text : ''}
-                        date={transformDate(chat.latest_update)}
-                        key={chat._id}
-                        getMessages={_ => dispatch(fetchMessages(chat._id))}/>
-                    )}
+                {chatSelectors}
             </List>
         </Box>
     );

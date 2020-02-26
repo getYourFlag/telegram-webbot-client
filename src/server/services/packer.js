@@ -1,4 +1,4 @@
-const telegramSpecials = require('../../../config/tgmgmt.json');
+const { systemMsg } = require('../../../config/telegram.json');
 const Bot = require('../models/bot');
 const { downloadFile } = require('../services/telegram');
 
@@ -26,9 +26,10 @@ const fromChannel = message => {
     }
 
     if (!message.text) {
-        for (key of Object.keys(telegramSpecials)) {
+        // Identify system message and replace the keywords in the predefined sentences.
+        for (key of Object.keys(systemMsg)) {
             if (message[key]) {
-                info.text = telegramSpecials[key].replace('$', message[key]);
+                info.text = systemMsg[key].replace('$', message[key]);
                 info.isSystemMessage = true;
                 break;
             }
@@ -66,19 +67,24 @@ const pack = request => {
         chatData = {...chatData, bot_id, type}
     }
 
+    // Use caption as text if existed and text is undefined.
+    if (!messageData.text && message.caption) messageData.text = message.caption;
+
     return {messageData, chatData}
 }
 
-const photo = async (botId, messageData, photoData) => {
+const media = async (botId, messageData, media, mediaType) => {
     const bot = await Bot.findById(botId);
-
-    const photo = photoData[photoData.length-1];
+    if (mediaType === "photo") media = media[media.length-1];
     if (!messageData.text) delete messageData.text;
-    messageData.media_link = await downloadFile(bot.token, photo.file_id, photo.file_unique_id + '.jpg');
+
+    let fileExtension = media.mime_type ? media.mime_type.split('/')[1] : 'jpg';
+    messageData.media_link = await downloadFile(bot.token, media.file_id, media.file_unique_id + '.' + fileExtension);
+    messageData.media_type = mediaType;
 
     return messageData;
 }
 
 module.exports = {
-    pack, photo
+    pack, media
 };

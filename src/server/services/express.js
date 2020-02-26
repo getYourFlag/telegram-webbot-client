@@ -10,6 +10,7 @@ const chatManageRouter = require("../routes/a2_chat");
 const botRouter = require("../routes/a2_bot");
 const messageRouter = require('../routes/9s_message');
 const sendMsgRouter = require("../routes/2b_message");
+const assetRouter = require('../routes/9s_asset');
 
 app.use(cors({
     origin: config.get('cors_path'),
@@ -29,5 +30,6 @@ app.use("/chatmgmt", chatManageRouter);
 app.use("/bots", botRouter);
 app.use('/messages', messageRouter);
 app.use("/send", sendMsgRouter);
+app.use("/assets", assetRouter);
 
 module.exports = app;

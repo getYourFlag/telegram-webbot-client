@@ -1,6 +1,6 @@
 {
     "frontend-url": "http://127.0.0.1:3000",
-    "backend-url": "https://11bb79e1.ngrok.io",
+    "backend-url": "http://localhost:8080",
     "mongodb": {
         "url": "localhost",
         "port": 27017,
