@@ -19,12 +19,13 @@ router.post("/login", async function(req, res) {
     if (!user) {
         return res
             .status(401)
-            .send({ error: "Username or Password Incorrect." });
+            .send({ error: 1 }).end();
     }
-    if (!bcrypt.compare(password, user.password)) {
+    const isCorrectPassword = await bcrypt.compare(password, user.password);
+    if (!isCorrectPassword) {
         return res
             .status(401)
-            .send({ error: "Username or Password Incorrect." });
+            .send({ error: 1 }).end();
     }
 
     user.last_login = Date.now();

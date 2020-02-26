@@ -16,6 +16,10 @@ export const botListError = data => {
     return { type: LIST_ERROR, payload: data}
 }
 
+export const redirectToLogin = _ => {
+    return { type: 'auth.LOGOUT' }
+}
+
 export const fetchBotList = () => {
     return dispatch => {
         dispatch(loadingBotList());
@@ -24,6 +28,7 @@ export const fetchBotList = () => {
         })
         .catch(err => {
             dispatch(botListError(err));
+            dispatch(redirectToLogin());
         })
     }
 }

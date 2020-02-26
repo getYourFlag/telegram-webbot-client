@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import '../css/chatDisplay.css';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Sendbox from './Sendbox';
@@ -21,11 +20,14 @@ const useStyles = makeStyles({
         backgroundColor: '#e0f2f1',
 
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+
+        padding: '1rem'
     },
     sendBox: {
         bottom: 0,
         height: '7rem',
+        width: '100%',
         flexGrow: 0
     }
 });

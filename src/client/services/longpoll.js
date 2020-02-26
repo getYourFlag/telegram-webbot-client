@@ -12,6 +12,7 @@ let updateInterval = config.updates.updateInterval;
 
 export const setChatUpdate = botId => {
     clearInterval(updateFnId);
+    if (!botId) return;
     updateBotId = botId;
     updateFnId = setInterval(_ => {
         store.dispatch(updateChat(updateBotId));
@@ -22,13 +23,13 @@ export const setChatUpdate = botId => {
 export const removeChatUpdate = _ => {
     clearInterval(updateFnId);
     updateStatus = null;
-    botId = null;
+    updateBotId = null;
 }
 
 export const setMessageUpdate = chatId => {
-    if (updateStatus === null || chatId === null) return null;
-    updateChatId = chatId;
     clearInterval(updateFnId);
+    if (updateStatus === null || chatId === null) return;
+    updateChatId = chatId;
     updateFnId = setInterval(_ => {
         store.dispatch(updateChat(updateBotId));
         store.dispatch(updateMessages(updateChatId));

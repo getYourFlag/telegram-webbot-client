@@ -19,12 +19,8 @@ const MessageSender = props => {
             margin: 0,
             width: '100%',
             height: '100%',
-            padding: theme.spacing(2),
             borderTop: '1px',
             borderTopColor: 'black',
-        },
-        input: {
-            width: '60vw'
         },
         button: {
             width: '20%',
@@ -37,7 +33,7 @@ const MessageSender = props => {
 
     return (
     <Grid container justify='center' alignItems='center' className={classes.root} spacing={2}>
-        <Grid item flexGrow={1}>
+        <Grid item>
             <TextField type='text' name='message' size="small" variant="outlined"
                 className={classes.input} multiline={true} rowsMax={3}
                 value={inputText} onChange={e => setInputText(e.target.value)} />

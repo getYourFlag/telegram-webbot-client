@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import '../css/chatmenu.css';
 import { useDispatch, useSelector } from "react-redux";
 import Selector from '../components/ChatSelector';
 import {setChatUpdate, removeChatUpdate} from '../services/longpoll';

@@ -1,3 +1,5 @@
+import errorMsg from '../../../config/errors.json';
+
 const initialState = {
     loggedIn: localStorage.getItem('user_nick'),
     error: null,
@@ -7,13 +9,15 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case "auth.AUTHENTICATING":
-            return { ...initialState, loading: true }
+            return { ...state, loading: true }
         case "auth.ERROR":
-            return { ...initialState, error: action.error };
+            return { ...state, error: action.error, loggedIn: false };
         case "auth.SUCCESS":
-            return { ...initialState, loggedIn: true};
+            return { ...state, error: null, loggedIn: true};
         case "auth.LOGOUT":
-            return { ...initialState, loggedIn: null};
+            localStorage.removeItem('user_id');
+            localStorage.removeItem('user_nick');
+            return { ...state, loggedIn: false};
         default:
             return state;
     }

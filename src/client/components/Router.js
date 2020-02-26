@@ -1,14 +1,17 @@
 import React from "react";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import MainPage from "../pages/MainPage";
+import LoginPage from "../pages/LoginForm";
 
 const Router = props => {
+
     return (
-        <HashRouter>
+        <BrowserRouter>
             <Switch>
-                <Route path="/" component={MainPage} />
+                <Route path="/" exact component={MainPage} />
+                <Route path="/login" component={LoginPage} />
             </Switch>
-        </HashRouter>
+        </BrowserRouter>
     );
 };
 

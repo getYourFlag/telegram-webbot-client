@@ -21,7 +21,7 @@ const NavBar = props => {
     if (isAuthed) {
       dispatch(fetchBotList())
     }
-  }, [dispatch, isAuthed]);
+  }, [isAuthed]);
 
   const useStyles = makeStyles(theme => ({
     root: {flexGrow: 1},
@@ -41,7 +41,7 @@ const NavBar = props => {
           <Typography variant='h6' className={classes.title}>
             Webbot Client
           </Typography>
-          {botList ? botList.map(bot => (
+          {isAuthed && botList ? botList.map(bot => (
             <Button 
               variant='contained'
               className={classes.button}
@@ -50,7 +50,7 @@ const NavBar = props => {
                 {bot.name}
             </Button>
             )) : null}
-          {isAuthed ? <Button variant='contained' onClick={_ => dispatch(logout())}>Logout</Button> : <Button color='inherit' href="/">Login</Button>}
+          {isAuthed ? <Button variant='contained' onClick={_ => dispatch(logout())}>Logout</Button> : <Button color='inherit' href="/login">Login</Button>}
         </Toolbar>
       </AppBar>
     </div>
