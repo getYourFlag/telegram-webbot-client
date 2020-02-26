@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Login from './pages/LoginForm';
-import './css/navbar.css';
 
 const useStyles = makeStyles({
   root: {

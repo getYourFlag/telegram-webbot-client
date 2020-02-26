@@ -1,50 +1,25 @@
 const router = require('express').Router();
 const Message = require('../models/message');
 const Chat = require('../models/chat');
-const Bot = require('../models/bot');
-const telegramSpecials = require('../../../config/tgmgmt.json');
+const Packer = require('../services/packer');
+const specialAttr = {
+    // Attr name => called packer function.
+    photo: 'photo'
+}
 
 router.post('/:botId', async (req, res) => {
-    const botId = req.params.botId;
-    let message = req.body.message || req.body.channel_post;
+    let {messageData, chatData} = Packer.pack(req);
+    let chat = await Chat.findOneAndUpdate({tg_id: chatData.tg_id}, chatData, {new: true, upsert: true});
+    messageData = {...messageData, ref_chat_id: chat._id}
 
-    const date = message.date * 1000;
-    const chat_id = message.chat.id;
-    let text = message.text;
-    let isSystemMessage = false;
-
-    const chatUpdate = {
-        tg_id: chat_id,
-        type: message.from ? 'private' : 'channel',
-        user_id: message.from ? message.from.id : chat_id, 
-        username: message.from ? message.from.username : message.chat.title,
-        title: message.from ?  (message.from.first_name + ' ' + message.from.last_name).trim() : message.chat.title.trim(),
-        bot_id: botId,
-    }
-    let chat = await Chat.findOneAndUpdate({tg_id: chat_id}, chatUpdate, {new: true, upsert: true});
-
-    if (!text) {
-        for (key of Object.keys(telegramSpecials)) {
-            console.log(key);
-            if (message[key]) {
-                text = telegramSpecials[key].replace('$', message[key]);
-                isSystemMessage = true;
-                break;
-            }
+    for (let fn of Object.keys(specialAttr)) {
+        if (req.body.message[fn]) {
+            messageData = await Packer[specialAttr[fn]](req.params.botId, messageData, req.body.message[fn]);
         }
     }
 
-    let newMessage = await Message.create({
-        update_id: req.body.update_id, 
-        message_id: message.message_id,
-        ref_chat_id: chat._id,
-        date: date,
-        text: text,
-        fromUs: false,
-        success: true,
-        isSystemMessage
-    });
-    await Chat.updateOne({_id: chat._id}, {$set: {latest_message: newMessage._id, latest_update: date}});
+    let newMessage = await Message.create(messageData);
+    await Chat.updateOne({_id: chat._id}, {$set: {latest_message: newMessage._id, latest_update: newMessage.date}});
     res.status(200).send(newMessage).end();
 });
 
