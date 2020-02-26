@@ -5,16 +5,16 @@ import {Redirect} from 'react-router-dom';
 import { Grid, Box, TextField, Typography, Button } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import makeStyles from '@material-ui/core/styles/makeStyles';
+import errorMessages from '../../../config/errors.json';
 
 const useStyles = makeStyles({
     root: {
-        height: '100%',
+        height: 'inherit',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
     },
     loginForm: {
-        width: '50vw',
         height: 'auto',
         padding: '1rem',
         border: '1px solid',
@@ -55,8 +55,8 @@ const LoginForm = props => {
     }
 
     return (
-        <Box className={classes.root}>
-            <Box className={classes.loginForm} spacing={2}>
+        <Grid container className={classes.root} spacing={2}>
+            <Grid item xs={11} md={9} lg={7} className={classes.loginForm}>
                 <Typography variant="h4" align="center" display="block" gutterBottom={true}>
                     Webbot Client Login
                 </Typography>
@@ -66,15 +66,15 @@ const LoginForm = props => {
                     label="Password" margin="normal" className={classes.fields}/>
                 {error ? 
                     <Alert severity="error" className={classes.fields}>
-                        Username or password incorrect, please try again.
+                        {errorMessages.auth[error.code]}
                     </Alert>
                 : null}
                 <Button variant="contained" color="primary" className={classes.button}
                     onClick={_ => dispatch(auth(username, password))}>
                     Login
                 </Button>
-            </Box>
-        </Box>
+            </Grid>
+        </Grid>
     );
 };
 

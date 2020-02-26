@@ -24,7 +24,7 @@ export const auth = (username, password) => {
             dispatch(authSuccess(res.data));
         })
         .catch(error => {
-            dispatch(authFail(error));
+            dispatch(authFail(error.response.data));
         })
     }
 }

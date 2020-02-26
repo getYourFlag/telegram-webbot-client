@@ -21,14 +21,31 @@ router.post("/login", async function(req, res) {
             .status(401)
             .send({ error: 1 }).end();
     }
+
+    // Throttling bad requests.
+    const MAX_ATTEMPTS = process.env.LOGIN_MAX_ATTEMPTS;
+    const COOLDOWN = process.env.LOGIN_COOLDOWN * 1000;
+    const currentTime = Date.now();
+
+    if (user.failed_attempts > MAX_ATTEMPTS && user.last_login > currentTime - COOLDOWN) {
+        return res.status(401).send({code: 2}).end();
+    }
+    user.last_login = currentTime;
+
     const isCorrectPassword = await bcrypt.compare(password, user.password);
     if (!isCorrectPassword) {
+        user.failed_attempts += 1;
+        let errorCode = 1;
+        if (user.failed_attempts > MAX_ATTEMPTS) {
+            errorCode = 2;
+        }
+
+        await user.save();
         return res
             .status(401)
-            .send({ error: 1 }).end();
+            .send({ code: errorCode }).end();
     }
 
-    user.last_login = Date.now();
     user.save();
 
     const token = jwt.sign(

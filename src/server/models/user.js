@@ -6,6 +6,7 @@ const userSchema = new Schema({
     password: { type: String, required: true, select: false },
     nick: { type: String, dropUps: true },
     last_login: { type: Date, default: Date.now },
+    failed_attempts: {type: Number, default: 0},
     permission: { type: Number, min: 0, max: 255 }
 },
 {

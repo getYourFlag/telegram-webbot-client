@@ -8,6 +8,8 @@ import Login from './pages/LoginForm';
 
 const useStyles = makeStyles({
   root: {
+    display: 'flex',
+    flexDirection: 'column',
     height: '100vh'
   },
   navbar: {
@@ -24,9 +26,9 @@ const App = props => {
 
   return (
     <React.Fragment>
-      <Box>
-        <NavBar />
-        <Router />
+      <Box className={classes.root}>
+        <NavBar className={classes.navbar}/>
+        <Router className={classes.content}/>
       </Box>
     </React.Fragment>
   );

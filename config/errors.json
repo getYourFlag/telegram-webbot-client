@@ -1,7 +1,7 @@
 {
     "auth": {
         "1": "Username or password incorrect, please try again.",
-        "2": "Too many failed attempts at login, please try again in $ minute(s).",
+        "2": "Too many failed attempts at login, please try again in 1 hour.",
         "3": "Authentication server error, please check server availibility."
     }
 }
