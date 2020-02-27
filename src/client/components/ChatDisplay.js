@@ -106,8 +106,7 @@ const ChatDisplay = props => {
                         variant="body1"
                         component="span"
                         color="textSecondary"
-                        className={classes.typeString}
-                    >
+                        className={classes.typeString}>
                         {currentChat.type}
                     </Typography>
                 </div>
@@ -120,8 +119,7 @@ const ChatDisplay = props => {
             container
             className={classes.root}
             direction="column"
-            alignItems="flex-start"
-        >
+            alignItems="flex-start">
             <Grid item>{chatHeader}</Grid>
             <Grid item ref={containerRef} className={classes.chatDisplay}>
                 {messages

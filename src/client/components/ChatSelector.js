@@ -29,8 +29,7 @@ const ChatSelector = props => {
             button
             divider
             onClick={props.getMessages}
-            alignItems="flex-start"
-        >
+            alignItems="flex-start">
             <ListItemText
                 primary={
                     <React.Fragment>
@@ -39,8 +38,7 @@ const ChatSelector = props => {
                             component="span"
                             variant="caption"
                             className={classes.inline}
-                            color="textSecondary"
-                        >
+                            color="textSecondary">
                             {props.date}
                         </Typography>
                     </React.Fragment>

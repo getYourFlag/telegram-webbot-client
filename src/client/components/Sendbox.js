@@ -37,8 +37,7 @@ const MessageSender = props => {
             justify="center"
             alignItems="center"
             className={classes.root}
-            spacing={2}
-        >
+            spacing={2}>
             <Grid item>
                 <TextField
                     type="text"
@@ -66,8 +65,7 @@ const MessageSender = props => {
                             })
                         );
                         setInputText("");
-                    }}
-                >
+                    }}>
                     SEND
                 </Button>
             </Grid>

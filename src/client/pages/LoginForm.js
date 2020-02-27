@@ -58,8 +58,7 @@ const LoginForm = props => {
                     variant="h4"
                     align="center"
                     display="block"
-                    gutterBottom={true}
-                >
+                    gutterBottom={true}>
                     Webbot Client Login
                 </Typography>
                 <TextField
@@ -89,8 +88,7 @@ const LoginForm = props => {
                     variant="contained"
                     color="primary"
                     className={classes.button}
-                    onClick={_ => dispatch(auth(username, password))}
-                >
+                    onClick={_ => dispatch(auth(username, password))}>
                     Login
                 </Button>
             </Grid>

@@ -47,8 +47,7 @@ const NavBar = props => {
                                   variant="contained"
                                   className={classes.button}
                                   key={bot._id}
-                                  onClick={_ => dispatch(fetchChats(bot))}
-                              >
+                                  onClick={_ => dispatch(fetchChats(bot))}>
                                   {bot.name}
                               </Button>
                           ))
@@ -56,8 +55,7 @@ const NavBar = props => {
                     {isAuthed ? (
                         <Button
                             variant="contained"
-                            onClick={_ => dispatch(logout())}
-                        >
+                            onClick={_ => dispatch(logout())}>
                             Logout
                         </Button>
                     ) : (
