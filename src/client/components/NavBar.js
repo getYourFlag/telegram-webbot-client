@@ -13,59 +13,62 @@ import { fetchBotList } from "../actions/bot";
 import { fetchChats } from "../actions/chat";
 
 const NavBar = props => {
-  const isAuthed = useSelector(state => state.authReducer.loggedIn);
-  const botList = useSelector(state => state.botReducer.list);
-  const dispatch = useDispatch();
+    const isAuthed = useSelector(state => state.authReducer.loggedIn);
+    const botList = useSelector(state => state.botReducer.list);
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (isAuthed) {
-      dispatch(fetchBotList());
-    }
-  }, [isAuthed]);
+    useEffect(() => {
+        if (isAuthed) {
+            dispatch(fetchBotList());
+        }
+    }, [isAuthed]);
 
-  const useStyles = makeStyles(theme => ({
-    root: { flexGrow: 1 },
-    menuButton: { marginRight: theme.spacing(2) },
-    title: { flexGrow: 1 },
-    button: { marginRight: theme.spacing(2) }
-  }));
-  const classes = useStyles();
+    const useStyles = makeStyles(theme => ({
+        root: { flexGrow: 1 },
+        menuButton: { marginRight: theme.spacing(2) },
+        title: { flexGrow: 1 },
+        button: { marginRight: theme.spacing(2) },
+    }));
+    const classes = useStyles();
 
-  return (
-    <div>
-      <AppBar color="primary" position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton}>
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Webbot Client
-          </Typography>
-          {isAuthed && botList
-            ? botList.map(bot => (
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  key={bot._id}
-                  onClick={_ => dispatch(fetchChats(bot))}
-                >
-                  {bot.name}
-                </Button>
-              ))
-            : null}
-          {isAuthed ? (
-            <Button variant="contained" onClick={_ => dispatch(logout())}>
-              Logout
-            </Button>
-          ) : (
-            <Button color="inherit" href="/login">
-              Login
-            </Button>
-          )}
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+    return (
+        <div>
+            <AppBar color="primary" position="static">
+                <Toolbar>
+                    <IconButton edge="start" className={classes.menuButton}>
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" className={classes.title}>
+                        Webbot Client
+                    </Typography>
+                    {isAuthed && botList
+                        ? botList.map(bot => (
+                              <Button
+                                  variant="contained"
+                                  className={classes.button}
+                                  key={bot._id}
+                                  onClick={_ => dispatch(fetchChats(bot))}
+                              >
+                                  {bot.name}
+                              </Button>
+                          ))
+                        : null}
+                    {isAuthed ? (
+                        <Button
+                            variant="contained"
+                            onClick={_ => dispatch(logout())}
+                        >
+                            Logout
+                        </Button>
+                    ) : (
+                        <Button color="inherit" href="/login">
+                            Login
+                        </Button>
+                    )}
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 };
 
 export default NavBar;

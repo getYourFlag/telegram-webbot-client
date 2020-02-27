@@ -5,10 +5,10 @@ import messageReducer from "./message";
 import { combineReducers } from "redux";
 
 const allReducers = combineReducers({
-  authReducer,
-  botReducer,
-  chatReducer,
-  messageReducer
+    authReducer,
+    botReducer,
+    chatReducer,
+    messageReducer,
 });
 
 export default allReducers;

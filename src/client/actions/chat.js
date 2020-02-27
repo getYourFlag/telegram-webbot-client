@@ -7,62 +7,62 @@ const ARCHIVE = "chat.ARCHIVE";
 const UPDATE = "chat.UPDATE";
 
 export const fetchSuccess = (chats, bot) => {
-  return { type: SUCCESS, payload: { chats, bot } };
+    return { type: SUCCESS, payload: { chats, bot } };
 };
 
 export const fetchFail = err => {
-  return { type: FAIL, payload: err };
+    return { type: FAIL, payload: err };
 };
 
 export const chatDeleted = data => {
-  return { type: DELETE, payload: data };
+    return { type: DELETE, payload: data };
 };
 
 export const archiveChat = data => {
-  return { type: ARCHIVE, payload: data };
+    return { type: ARCHIVE, payload: data };
 };
 
 export const chatUpdated = data => {
-  return { type: UPDATE, payload: data };
+    return { type: UPDATE, payload: data };
 };
 
 export const fetchChats = bot => {
-  return dispatch => {
-    return axios
-      .get("/chats/bot/" + bot._id)
-      .then(res => {
-        dispatch(fetchSuccess(res.data, bot));
-      })
-      .catch(err => {
-        dispatch(fetchFail(err));
-      });
-  };
+    return dispatch => {
+        return axios
+            .get("/chats/bot/" + bot._id)
+            .then(res => {
+                dispatch(fetchSuccess(res.data, bot));
+            })
+            .catch(err => {
+                dispatch(fetchFail(err));
+            });
+    };
 };
 
 export const deleteChat = chatId => {
-  return dispatch => {
-    dispatch(fetchingChat());
-    return axios
-      .delete("/chats/delete/" + chatId)
-      .then(res => {
-        dispatch(fetchSuccess(res.data));
-      })
-      .catch(err => {
-        dispatch(fetchFail(err));
-      });
-  };
+    return dispatch => {
+        dispatch(fetchingChat());
+        return axios
+            .delete("/chats/delete/" + chatId)
+            .then(res => {
+                dispatch(fetchSuccess(res.data));
+            })
+            .catch(err => {
+                dispatch(fetchFail(err));
+            });
+    };
 };
 
 export const updateChat = bot_id => {
-  return (dispatch, getState) => {
-    const time = getState().chatReducer.lastUpdate;
-    return axios
-      .get("/chats/update", { params: { time, bot_id } })
-      .then(res => {
-        dispatch(chatUpdated(res.data));
-      })
-      .catch(err => {
-        dispatch(fetchFail(err));
-      });
-  };
+    return (dispatch, getState) => {
+        const time = getState().chatReducer.lastUpdate;
+        return axios
+            .get("/chats/update", { params: { time, bot_id } })
+            .then(res => {
+                dispatch(chatUpdated(res.data));
+            })
+            .catch(err => {
+                dispatch(fetchFail(err));
+            });
+    };
 };

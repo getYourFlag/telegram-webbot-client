@@ -13,17 +13,17 @@ const sendMsgRouter = require("../routes/2b_message");
 const assetRouter = require("../routes/9s_asset");
 
 app.use(
-  cors({
-    origin: config.get("cors_path"),
-    credentials: true
-  })
+    cors({
+        origin: config.get("cors_path"),
+        credentials: true,
+    })
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-  res.send("Hello Express!");
+    res.send("Hello Express!");
 });
 app.use("/users", userRouter);
 app.use("/receive", webhook);
