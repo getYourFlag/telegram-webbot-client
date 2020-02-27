@@ -1,16 +1,16 @@
 {
-    "systemMsg": {
-        "new_chat_members": "$ has joined the group.",
-        "left_chat_member": "$ has left the group.",
-        "new_chat_title": "Chat title changed to $",
-        "new_chat_photo": "Chat photo updated.",
-        "delete_chat_photo": "Chat photo deleted.",
-        "pinned_message": "A message has been pinned.",
-        "group_chat_created": "$ Group chat created.",
-        "supergroup_chat_created": "$ Supergroup chat created.",
-        "channel_chat_created": "$ channel was created.",
-        "migrate_to_chat_id": "Chat with ID $ was migrated to a supergroup.",
-        "migrate_from_chat_id": "Supergroup was migrated from chat with ID $"
-    },
-    "mediaTypes": ["photo", "document", "video", "audio", "voice", "animation"]
+  "systemMsg": {
+    "new_chat_members": "$ has joined the group.",
+    "left_chat_member": "$ has left the group.",
+    "new_chat_title": "Chat title changed to $",
+    "new_chat_photo": "Chat photo updated.",
+    "delete_chat_photo": "Chat photo deleted.",
+    "pinned_message": "A message has been pinned.",
+    "group_chat_created": "$ Group chat created.",
+    "supergroup_chat_created": "$ Supergroup chat created.",
+    "channel_chat_created": "$ channel was created.",
+    "migrate_to_chat_id": "Chat with ID $ was migrated to a supergroup.",
+    "migrate_from_chat_id": "Supergroup was migrated from chat with ID $"
+  },
+  "mediaTypes": ["photo", "document", "video", "audio", "voice", "animation"]
 }

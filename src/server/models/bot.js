@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const botSchema = new Schema({
-    token: {type: String, required: true},
-    name: String,
-    description: String
+  token: { type: String, required: true },
+  name: String,
+  description: String
 });
 
-module.exports = mongoose.model('Bot', botSchema);
+module.exports = mongoose.model("Bot", botSchema);

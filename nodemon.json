@@ -1,6 +1,3 @@
 {
-    "ignore": [
-        ".git",
-        "src/client/*"
-    ]
+  "ignore": [".git", "src/client/*"]
 }
