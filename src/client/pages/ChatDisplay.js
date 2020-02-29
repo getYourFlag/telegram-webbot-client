@@ -2,8 +2,8 @@ import React, { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { unloadMessages } from "../actions/message";
 
-import Sendbox from "./Sendbox";
-import Message from "./Message";
+import MessageBox from "../components/MessageBox";
+import Message from "../components/Message";
 import { setMessageUpdate, removeMessageUpdate } from "../services/longpoll";
 import { Grid, Typography, useMediaQuery, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 
         padding: "1rem",
     },
-    sendBox: {
+    messageBox: {
         bottom: 0,
         height: "5.5rem",
         width: "100%",
@@ -118,8 +118,8 @@ const ChatDisplay = props => {
                     ? messages.map(v => <Message message={v} key={v._id} />)
                     : null}
             </Grid>
-            <Grid item className={classes.sendBox}>
-                <Sendbox currentChat={currentChat} currentBot={currentBot} />
+            <Grid item className={classes.messageBox}>
+                <MessageBox currentChat={currentChat} currentBot={currentBot} />
             </Grid>
         </Grid>
     );

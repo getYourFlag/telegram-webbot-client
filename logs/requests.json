@@ -1,0 +1,25 @@
+[
+    {
+        "update_id": 849934780,
+        "message": {
+            "message_id": 155,
+            "from": {
+                "id": 909722097,
+                "is_bot": false,
+                "first_name": "Casey",
+                "last_name": "Neistat",
+                "username": "casey_9472",
+                "language_code": "zh-hans"
+            },
+            "chat": {
+                "id": 909722097,
+                "first_name": "Casey",
+                "last_name": "Neistat",
+                "username": "casey_9472",
+                "type": "private"
+            },
+            "date": 1582955598,
+            "text": "Test request logging"
+        }
+    }
+]

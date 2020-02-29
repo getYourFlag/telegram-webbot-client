@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import ChatMenu from "../components/ChatMenu";
-import ChatDisplay from "../components/ChatDisplay";
-import { Grid, Box } from "@material-ui/core";
+import ChatMenu from "./ChatMenu";
+import ChatDisplay from "./ChatDisplay";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Redirect } from "react-router-dom";
 

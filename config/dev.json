@@ -19,5 +19,8 @@
     "updates": {
         "autoUpdate": true,
         "updateInterval": 5000
+    },
+    "development": {
+        "logRequests": true
     }
 }
