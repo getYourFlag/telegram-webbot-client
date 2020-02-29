@@ -10,23 +10,23 @@ const MessageSender = props => {
 
     const useStyles = makeStyles(theme => ({
         root: {
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-
             bottom: 0,
             margin: 0,
-            width: "100%",
+            width: "90%",
             height: "100%",
             borderTop: "1px",
             borderTopColor: "black",
+            marginLeft: 'auto',
+            marginRight: 'auto'
         },
         button: {
-            width: "20%",
+            display: "block",
+            width: "100%",
             flexGrow: 0,
             height: "2.5rem",
             width: "5rem",
+            marginLeft: 'auto',
+            marginRight: 'auto'
         },
     }));
     const classes = useStyles();
@@ -34,12 +34,14 @@ const MessageSender = props => {
     return (
         <Grid
             container
+            direction="row"
             justify="center"
             alignItems="center"
             className={classes.root}
             spacing={2}>
-            <Grid item>
+            <Grid item xs={9}>
                 <TextField
+                fullWidth
                     type="text"
                     name="message"
                     size="small"
@@ -51,7 +53,7 @@ const MessageSender = props => {
                     onChange={e => setInputText(e.target.value)}
                 />
             </Grid>
-            <Grid item>
+            <Grid item xs={3}>
                 <Button
                     variant="contained"
                     color="primary"

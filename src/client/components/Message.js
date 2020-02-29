@@ -25,6 +25,8 @@ const useStyles = makeStyles({
         fontSize: "1rem",
         fontFamily: ['"Noto Sans"', '"Roboto"', "sans-serif"],
         margin: "0.5rem",
+        wordWrap: 'break-word',
+        whiteSpace: 'pre-line'
     },
     date: {
         fontSize: "0.8rem",

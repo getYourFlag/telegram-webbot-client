@@ -5,7 +5,7 @@ import { unloadMessages } from "../actions/message";
 import Sendbox from "./Sendbox";
 import Message from "./Message";
 import { setMessageUpdate, removeMessageUpdate } from "../services/longpoll";
-import { Grid, Typography, useMediaQuery } from "@material-ui/core";
+import { Grid, Typography, useMediaQuery, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
@@ -19,13 +19,8 @@ const useStyles = makeStyles({
         justifyContent: "flex-start",
     },
     backIcon: {
-        cursor: "pointer",
-        marginLeft: "1rem",
-        padding: "0.5rem",
-        fontSize: "1.5rem",
-        border: "1px solid",
-        borderColor: "black",
-        borderRadius: "50%",
+        marginLeft: '1rem',
+        borderRadius: "10%"
     },
     title: {
         margin: "0.5rem",
@@ -47,13 +42,10 @@ const useStyles = makeStyles({
     },
     sendBox: {
         bottom: 0,
-        height: "7rem",
+        height: "5.5rem",
         width: "100%",
         flexGrow: 0,
-    },
-    typeString: {
-        textTransform: "uppercase",
-    },
+    }
 });
 
 const ChatDisplay = props => {
@@ -92,11 +84,12 @@ const ChatDisplay = props => {
         chatHeader = (
             <div className={classes.chatHeader}>
                 <div>
-                    <ArrowBackIcon
-                        color="action"
+                    <Button
+                        variant="contained"
                         className={classes.backIcon}
-                        onClick={_ => dispatch(unloadMessages())}
-                    />
+                        onClick={_ => dispatch(unloadMessages())}>
+                        <ArrowBackIcon color="action" />
+                    </Button>
                 </div>
                 <div className={classes.title}>
                     <Typography variant="h5" color="textPrimary">
@@ -105,9 +98,8 @@ const ChatDisplay = props => {
                     <Typography
                         variant="body1"
                         component="span"
-                        color="textSecondary"
-                        className={classes.typeString}>
-                        {currentChat.type}
+                        color="textSecondary">
+                        {currentChat.type.substring(0, 1).toUpperCase() + currentChat.type.substring(1).toLowerCase()}
                     </Typography>
                 </div>
             </div>

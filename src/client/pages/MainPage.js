@@ -8,10 +8,11 @@ import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
-        height: "auto",
-        marginY: "auto",
+        height: "inherit",
         maxHeight: "100vh",
-    },
+        margin: 0,
+        padding: 0
+    }
 });
 
 const MainPage = props => {
@@ -29,7 +30,7 @@ const MainPage = props => {
 
     return (
         <Grid container spacing={0} className={classes.root}>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={3} zeroMinWidth>
                 <ChatMenu />
             </Grid>
             <Grid item xs={12} md={9}>
