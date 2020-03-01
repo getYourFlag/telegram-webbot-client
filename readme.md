@@ -27,10 +27,20 @@ Due to the nature of Telegram Bot API, this web client could not do the followin
 
 You need to have node, npm and a web server of you choice (nginx is recommended) installed on the server before deploying the web client.
 
-1. Clone the git repository and install dependencies
+*1.* Clone the git repository and install dependencies
 
 ```javascript
 git clone https://github.com/getYourFlag/telegram-webbot-client
 cd telegram-webbot-client
 npm install
 ```
+
+*2.* Use CLI Tools to execute the backend server (e.g. forever)
+*3.* Configure your web server to point to src/client/index.html
+*4.* Enjoy!
+
+## Todos
+
+1. GUI Administrator Panel for adding / removing bots, users and webhooks.
+2. Modify and delete messages.
+3. A more customizable permission system.
