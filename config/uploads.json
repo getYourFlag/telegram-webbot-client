@@ -1,0 +1,11 @@
+{
+    "mediaTypes": {
+        "image/png": "photo",
+        "image/jpeg": "photo",
+        "image/gif": "photo",
+        "image/webp": "photo",
+        "video/mp4": "video",
+        "audio/mpeg": "audio",
+        "audio/ogg": "audio"
+    }
+}

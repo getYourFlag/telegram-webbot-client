@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import { Grid, Box, TextField, Typography, Button } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import errorMessages from "../../../config/errors.json";
+import errorMessages from "../../../config/errorDisplay.json";
 
 const useStyles = makeStyles({
     root: {

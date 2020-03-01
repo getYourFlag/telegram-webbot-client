@@ -58,6 +58,7 @@ router.post("/login", async function(req, res) {
 
     const token = jwt.sign(
         {
+            id: user._id,
             username,
             nick: user.nick,
             permission: user.permission,
@@ -85,6 +86,18 @@ router.get("/me", authMiddleware(), function(req, res) {
             .send(user)
             .end()
     );
+});
+
+router.patch("/patch", authMiddleware(), function(req, res) {
+    User.findByIdAndUpdate(req.user.id, req.body).then(user => {
+        res.status(200).send(user).end();
+    });
+});
+
+router.patch("/patch/:id", authMiddleware(255), function(req, res) {
+    User.findByIdAndUpdate(req.user.id, req.body).then(user => {
+        res.status(200).send(user).end();
+    });
 });
 
 module.exports = router;

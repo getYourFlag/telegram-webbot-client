@@ -1,5 +1,3 @@
-import errorMsg from "../../../config/errors.json";
-
 const initialState = {
     loggedIn: localStorage.getItem("user_nick"),
     error: null,

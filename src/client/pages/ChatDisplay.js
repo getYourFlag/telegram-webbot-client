@@ -12,11 +12,13 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 const useStyles = makeStyles({
     root: {
         height: "90vh",
+        backgroundColor: '#eeeeee'
     },
     chatHeader: {
         display: "flex",
         alignItems: "center",
         justifyContent: "flex-start",
+        flexGrow: 0
     },
     backIcon: {
         marginLeft: '1rem',
@@ -32,12 +34,10 @@ const useStyles = makeStyles({
         height: "60%",
         overflowY: "scroll",
         flexGrow: 1,
-
-        backgroundColor: "#e0f2f1",
+        flexShrink: 0,
 
         display: "flex",
         flexDirection: "column",
-
         padding: "1rem",
     },
     messageBox: {
@@ -45,6 +45,7 @@ const useStyles = makeStyles({
         height: "5.5rem",
         width: "100%",
         flexGrow: 0,
+        flexShrink: 0
     }
 });
 
@@ -82,7 +83,7 @@ const ChatDisplay = props => {
     let chatHeader = null;
     if (currentChat) {
         chatHeader = (
-            <div className={classes.chatHeader}>
+            <Grid item className={classes.chatHeader}>
                 <div>
                     <Button
                         variant="contained"
@@ -102,7 +103,7 @@ const ChatDisplay = props => {
                         {currentChat.type.substring(0, 1).toUpperCase() + currentChat.type.substring(1).toLowerCase()}
                     </Typography>
                 </div>
-            </div>
+            </Grid>
         );
     }
 
@@ -111,8 +112,9 @@ const ChatDisplay = props => {
             container
             className={classes.root}
             direction="column"
-            alignItems="flex-start">
-            <Grid item>{chatHeader}</Grid>
+            alignContent="space-between"
+            alignItems="stretch">
+            {chatHeader}
             <Grid item ref={containerRef} className={classes.chatDisplay}>
                 {messages
                     ? messages.map(v => <Message message={v} key={v._id} />)

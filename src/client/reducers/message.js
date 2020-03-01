@@ -41,19 +41,21 @@ const messageReducer = (state = initialState, action) => {
             messages = JSON.parse(JSON.stringify(state.messages)).concat(
                 action.payload
             );
-            return { ...state, messages: messages };
+            return { ...state, messages: messages, error: null };
         case "message.UPDATE":
             if (action.payload.length === 0) return state;
             messages = getUpdatedMessages(state.messages, action.payload);
-            return { ...state, messages: messages, lastUpdate: Date.now() };
-        case "message.UNLOAD":
+            return { ...state, 
+                messages: messages, 
+                error: null,
+                lastUpdate: Date.now() };
+        case "message.SEND_FAIL":
             return {
                 ...state,
-                loaded: false,
-                messages: [],
-                error: null,
-                currentChat: null,
+                error: action.payload
             };
+        case "message.UNLOAD":
+            return initialState;
         default:
             return state;
     }

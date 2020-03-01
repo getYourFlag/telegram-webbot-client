@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Box, useMediaQuery } from "@material-ui/core";
+import Media from './Media';
 import { makeStyles } from "@material-ui/core/styles";
 import config from "../../../config/dev.json";
 
@@ -79,27 +80,7 @@ const Message = props => {
     let media = null;
     if (props.message.media_link) {
         let mediaLink = config["backend-url"] + props.message.media_link;
-        switch (props.message.media_type) {
-            case "video":
-                media = (
-                    <video controls className={classes.media}>
-                        <source src={mediaLink} type="video/mp4" />
-                        Sorry, your browser does not support HTML5 Video Tag.
-                    </video>
-                );
-                break;
-            case "audio":
-            case "voice":
-                media = (
-                    <audio controls src={mediaLink} className={classes.media}>
-                        Sorry, your browser does not support HTML5 Audio Tag.
-                    </audio>
-                );
-                break;
-            case "photo":
-            default:
-                media = <img src={mediaLink} className={classes.media} />;
-        }
+        media = <Media src={mediaLink} type={props.message.media_type} styleClass={classes.media} mimeTypes={false} />
     }
 
     return (

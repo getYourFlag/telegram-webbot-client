@@ -3,5 +3,9 @@
         "1": "Username or password incorrect, please try again.",
         "2": "Too many failed attempts at login, please try again in 1 hour.",
         "3": "Authentication server error, please check server availibility."
+    },
+    "sendMsg": {
+        "403": "Bot was blocked by the user, the user may have chosen to stop the bot.",
+        "default": "Undocumented error, please refer to error logs for reasons."
     }
 }

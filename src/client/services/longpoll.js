@@ -41,7 +41,7 @@ export const removeMessageUpdate = _ => {
     updateChatId = null;
     clearInterval(updateFnId);
     updateFnId = setInterval(_ => {
-        store.dispatch(updateChat(botId));
+        store.dispatch(updateChat(updateBotId));
     });
     updateStatus = "chat";
 };

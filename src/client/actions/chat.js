@@ -34,7 +34,11 @@ export const fetchChats = bot => {
                 dispatch(fetchSuccess(res.data, bot));
             })
             .catch(err => {
-                dispatch(fetchFail(err));
+                if (err.response) {
+                    dispatch(sendFail(err.response.data));
+                } else {
+                    dispatch(sendFail(err));
+                }
             });
     };
 };
@@ -48,7 +52,11 @@ export const deleteChat = chatId => {
                 dispatch(fetchSuccess(res.data));
             })
             .catch(err => {
-                dispatch(fetchFail(err));
+                if (err.response) {
+                    dispatch(sendFail(err.response.data));
+                } else {
+                    dispatch(sendFail(err));
+                }
             });
     };
 };
@@ -62,7 +70,11 @@ export const updateChat = bot_id => {
                 dispatch(chatUpdated(res.data));
             })
             .catch(err => {
-                dispatch(fetchFail(err));
+                if (err.response) {
+                    dispatch(sendFail(err.response.data));
+                } else {
+                    dispatch(sendFail(err));
+                }
             });
     };
 };

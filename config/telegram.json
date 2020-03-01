@@ -12,5 +12,21 @@
         "migrate_to_chat_id": "Chat with ID $ was migrated to a supergroup.",
         "migrate_from_chat_id": "Supergroup was migrated from chat with ID $"
     },
-    "mediaTypes": ["photo", "document", "video", "audio", "voice", "animation"]
+    "mediaTypes": ["photo", "document", "video", "audio", "voice", "animation"],
+    "references": {
+        "photo": {
+            "callFn": "sendPhoto",
+            "attribute": "photo"
+        },
+        "video": {
+            "callFn": "sendVideo",
+            "attribute": "video"
+        },
+        "audio": "sendAudio"
+    },
+    "mediaVerification": {
+        "photo": {
+            "maxSize": 10245670
+        }
+    }
 }

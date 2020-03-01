@@ -16,10 +16,12 @@ router.post("/:botId", async (req, res) => {
             if (err) {
                 console.log("Creating Log File for requests logging ......");
             } else {
-                requestJson = JSON.parse(file);
+                try {
+                    requestJson = JSON.parse(file);
+                } catch (e) {}
             }
             requestJson.push(req.body);
-            fs.writeFile(logFilePath, JSON.stringify(requestJson), (err, res) => {});
+            fs.writeFile(logFilePath, JSON.stringify(requestJson, null, 4), (err, res) => {});
         })
     }
 

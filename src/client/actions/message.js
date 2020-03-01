@@ -25,7 +25,7 @@ export const fetchMessages = chat => {
                 dispatch(fetchSuccess(res.data, chat, SUCCESS));
             })
             .catch(err => {
-                dispatch(fetchFail(err, chat));
+                dispatch(sendFail(err, chat));
             });
     };
 };
@@ -42,7 +42,7 @@ export const updateMessages = chatId => {
                 dispatch(fetchSuccess(res.data, chatId, UPDATE));
             })
             .catch(err => {
-                dispatch(fetchFail(err, chatId));
+                dispatch(sendFail(err, chat));
             });
     };
 };

@@ -51,7 +51,7 @@ const ChatMenu = props => {
             chat.latest_message.media_link
         ) {
             let mediaType =
-                chat.latest_message.media_type.toUpperCase() || "Media";
+                chat.latest_message.media_type || "Media";
             dialog = `${mediaType} Content`;
         }
 

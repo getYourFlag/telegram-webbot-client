@@ -1,15 +1,15 @@
 [
     {
-        "update_id": 849934780,
+        "update_id": 849934782,
         "message": {
-            "message_id": 155,
+            "message_id": 163,
             "from": {
                 "id": 909722097,
                 "is_bot": false,
                 "first_name": "Casey",
                 "last_name": "Neistat",
                 "username": "casey_9472",
-                "language_code": "zh-hans"
+                "language_code": "en"
             },
             "chat": {
                 "id": 909722097,
@@ -18,8 +18,52 @@
                 "username": "casey_9472",
                 "type": "private"
             },
-            "date": 1582955598,
-            "text": "Test request logging"
+            "date": 1583044063,
+            "photo": [
+                {
+                    "file_id": "AgACAgUAAxkBAAOjXltV33gSUTkAAV30BzRGncXANWnIAALAqjEbQ63YVgAB2LjSWybOw0SHb2p0AAMBAAMCAANtAAPI4AACGAQ",
+                    "file_unique_id": "AQADRIdvanQAA8jgAAI",
+                    "file_size": 15946,
+                    "width": 320,
+                    "height": 240
+                },
+                {
+                    "file_id": "AgACAgUAAxkBAAOjXltV33gSUTkAAV30BzRGncXANWnIAALAqjEbQ63YVgAB2LjSWybOw0SHb2p0AAMBAAMCAAN4AAPJ4AACGAQ",
+                    "file_unique_id": "AQADRIdvanQAA8ngAAI",
+                    "file_size": 71011,
+                    "width": 800,
+                    "height": 600
+                },
+                {
+                    "file_id": "AgACAgUAAxkBAAOjXltV33gSUTkAAV30BzRGncXANWnIAALAqjEbQ63YVgAB2LjSWybOw0SHb2p0AAMBAAMCAAN5AAPK4AACGAQ",
+                    "file_unique_id": "AQADRIdvanQAA8rgAAI",
+                    "file_size": 188340,
+                    "width": 1280,
+                    "height": 960
+                }
+            ]
+        }
+    },
+    {
+        "update_id": 849934783,
+        "message": {
+            "message_id": 166,
+            "from": {
+                "id": 909722097,
+                "is_bot": false,
+                "first_name": "Casey",
+                "last_name": "Neistat",
+                "username": "casey_9472",
+                "language_code": "en"
+            },
+            "chat": {
+                "id": -285732010,
+                "title": "測試群組",
+                "type": "group",
+                "all_members_are_administrators": true
+            },
+            "date": 1583058611,
+            "group_chat_created": true
         }
     }
 ]
