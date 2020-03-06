@@ -2,10 +2,23 @@
     "auth": {
         "1": "Username or password incorrect, please try again.",
         "2": "Too many failed attempts at login, please try again in 1 hour.",
-        "3": "Authentication server error, please check server availibility."
+        "3": "Authentication server error, please check server availibility.",
+        "4": "Your account does not have the adequate permission to complete the specified action."
+    },
+    "getChat": {
+        "401": "Bot was unauthorized, the bot may be removed from the chat.",
+        "403": "Bot was blocked by the group or channel.",
+        "420": "Too many requests were made from your server to Telegram, please check the status of server."
+    },
+    "getMesssages": {
+        "401": "Bot was unauthorized, the bot may be removed from the chat.",
+        "403": "Bot was blocked by the chat owner.",
+        "420": "Too many requests were made from your server to Telegram, please check the status of server."
     },
     "sendMsg": {
+        "401": "Bot was unauthorized, the bot may not have permission to send messages to this chat.",
         "403": "Bot was blocked by the user, the user may have chosen to stop the bot.",
-        "default": "Undocumented error, please refer to error logs for reasons."
-    }
+        "420": "Too many requests were made from your server to Telegram, please check the status of server."
+    },
+    "default": "Undocumented error, please refer to error logs for reasons."
 }

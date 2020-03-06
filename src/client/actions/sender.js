@@ -33,8 +33,9 @@ export const sendMessages = data => {
                 dispatch(updateChat(res.data));
             })
             .catch(err => {
-                let errorMsg = errors.sendMsg[err.error_code] || errors.sendMsg.default;
-                dispatch(sendFail(errorMsg));
+                err = err.response.data;
+                let errorMsg = errors.sendMsg[err.error_code] || errors.default;
+                dispatch(sendFail({action: 'sending messages', message: errorMsg}));
             });
     };
 };
@@ -52,7 +53,9 @@ export const sendMedia = (data, type) => {
                 dispatch(updateChat(res.data));
             })
             .catch(err => {
-                dispatch(sendFail(err));
+                err = err.response.data;
+                let errorMsg = errors.sendMsg[err.error_code] || errors.default;
+                dispatch(sendFail({action: 'sending media', message: errorMsg}));
             });
     }
 }

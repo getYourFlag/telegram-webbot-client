@@ -69,7 +69,7 @@ router.post("/message", async (req, res) => {
         console.error(error.response.data);
         return res
             .status(500)
-            .send(error.response.datar)
+            .send(error.response.data)
             .end();
     });
 });

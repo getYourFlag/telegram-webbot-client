@@ -9,14 +9,15 @@ import errorMessages from "../../../config/errorDisplay.json";
 
 const useStyles = makeStyles({
     root: {
-        height: "inherit",
+        height: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor: "#eeeeee"
     },
     loginForm: {
         height: "auto",
-        padding: "1rem",
+        backgroundColor: "white",
         border: "1px solid",
         borderColor: "gray",
         borderRadius: "0.5rem",
@@ -52,14 +53,14 @@ const LoginForm = props => {
     }
 
     return (
-        <Grid container className={classes.root} spacing={2}>
-            <Grid item xs={11} md={9} lg={7} className={classes.loginForm}>
+        <Grid container className={classes.root} spacing={5}>
+            <Grid item xs={11} md={8} lg={6} className={classes.loginForm}>
                 <Typography
                     variant="h4"
                     align="center"
                     display="block"
                     gutterBottom={true}>
-                    Webbot Client Login
+                    Telegram Webbot Client Login
                 </Typography>
                 <TextField
                     variant="outlined"

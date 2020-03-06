@@ -5,13 +5,14 @@ import { unloadMessages } from "../actions/message";
 import MessageBox from "../components/MessageBox";
 import Message from "../components/Message";
 import { setMessageUpdate, removeMessageUpdate } from "../services/longpoll";
-import { Grid, Typography, useMediaQuery, Button } from "@material-ui/core";
+import { Grid, Typography, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const useStyles = makeStyles({
     root: {
-        height: "90vh",
+        height: "inherit",
+        maxHeight: "inherit",
         backgroundColor: '#eeeeee'
     },
     chatHeader: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles({
     },
     chatDisplay: {
         width: "100%",
-        height: "60%",
+        height: "50%",
         overflowY: "scroll",
         flexGrow: 1,
         flexShrink: 0,
@@ -42,9 +43,8 @@ const useStyles = makeStyles({
     },
     messageBox: {
         bottom: 0,
-        height: "5.5rem",
+        height: "6rem",
         width: "100%",
-        flexGrow: 0,
         flexShrink: 0
     }
 });

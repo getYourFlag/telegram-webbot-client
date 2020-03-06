@@ -5,14 +5,13 @@ import { setChatUpdate, removeChatUpdate } from "../services/longpoll";
 import { fetchMessages } from "../actions/message";
 import transformDate from "../services/dateTransform";
 
-import { List, Typography, Box, useMediaQuery } from "@material-ui/core";
+import { List, Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 
 const ChatMenu = props => {
     const chatList = useSelector(state => state.chatReducer.chats);
     const currentBot = useSelector(state => state.chatReducer.currentBot);
-    const isMessageLoaded = useSelector(state => state.messageReducer.loaded);
     const dispatch = useDispatch();
 
     useEffect(
@@ -25,6 +24,8 @@ const ChatMenu = props => {
 
     const useStyles = makeStyles(theme => ({
         root: {
+            height: "inherit",
+            maxHeight: "inherit",
             borderRight: "2px",
             borderRightColor: "#999",
         },
@@ -34,11 +35,6 @@ const ChatMenu = props => {
         },
     }));
     const classes = useStyles();
-    const mediaQuery = useMediaQuery("(min-width:960px)");
-
-    if (!mediaQuery && isMessageLoaded) {
-        return null;
-    }
 
     const chatSelectors = chatList.map(chat => {
         let dialog = "";

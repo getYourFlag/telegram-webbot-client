@@ -1,4 +1,5 @@
 import axios from "../services/axios";
+import errors from "../../../config/errorDisplay.json";
 
 const SUCCESS = "chat.FETCH_SUCCESS";
 const FAIL = "chat.FETCH_FAIL";
@@ -35,7 +36,8 @@ export const fetchChats = bot => {
             })
             .catch(err => {
                 if (err.response) {
-                    dispatch(sendFail(err.response.data));
+                    let errorMsg = errors.getChat[err.response.data.error_code] || errors.default;
+                    dispatch(sendFail(errorMsg));
                 } else {
                     dispatch(sendFail(err));
                 }
@@ -53,7 +55,8 @@ export const deleteChat = chatId => {
             })
             .catch(err => {
                 if (err.response) {
-                    dispatch(sendFail(err.response.data));
+                    let errorMsg = errors.getChat[err.response.data.error_code] || errors.default;
+                    dispatch(sendFail({action: 'receiving chats', message: errorMsg}));
                 } else {
                     dispatch(sendFail(err));
                 }
@@ -71,7 +74,8 @@ export const updateChat = bot_id => {
             })
             .catch(err => {
                 if (err.response) {
-                    dispatch(sendFail(err.response.data));
+                    let errorMsg = errors.getChat[err.response.data.error_code] || errors.default;
+                    dispatch(sendFail({action: 'updating chats', message: errorMsg}));
                 } else {
                     dispatch(sendFail(err));
                 }
