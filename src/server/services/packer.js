@@ -78,8 +78,9 @@ const media = async (botId, messageData, media, mediaType) => {
     const bot = await Bot.findById(botId);
     if (mediaType === "photo") media = media[media.length - 1];
     if (!messageData.text) delete messageData.text;
-
     let fileExtension = media.mime_type ? media.mime_type.split("/")[1] : "jpg";
+
+    // Downloads the media content from Telegram Server.
     messageData.media_link = await downloadFile(
         bot.token,
         media.file_id,

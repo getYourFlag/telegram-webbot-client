@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Grid, Button, Menu, MenuItem } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 
-import { sendMessages } from "../actions/sender";
+import { sendMessages } from "../../actions/sender";
 import MediaUpload from "./MediaUpload";
 
 const MessageSender = props => {

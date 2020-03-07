@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Box, useMediaQuery } from "@material-ui/core";
 import Media from './Media';
 import { makeStyles } from "@material-ui/core/styles";
-import config from "../../../config/dev.json";
+import config from "../../../../config/dev.json";
 
 const useStyles = makeStyles({
     message: {

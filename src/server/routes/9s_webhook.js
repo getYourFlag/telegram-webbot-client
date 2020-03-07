@@ -46,8 +46,9 @@ router.post("/:botId", async (req, res) => {
             );
         }
     }
-
     let newMessage = await Message.create(messageData);
+
+    // Updates the latest message infomation.
     await Chat.updateOne(
         { _id: chat._id },
         {
@@ -58,7 +59,7 @@ router.post("/:botId", async (req, res) => {
         }
     );
     res.status(200)
-        .send(newMessage)
+        .send()
         .end();
 });
 

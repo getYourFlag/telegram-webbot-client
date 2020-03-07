@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginForm";
+import SettingsPage from './pages/Setting';
 
 const useStyles = makeStyles({
     root: {
@@ -30,6 +31,7 @@ const App = props => {
             <Switch>
                 <Route path="/" exact component={MainPage} />
                 <Route path="/login" component={LoginPage} />
+                <Route path="/settings" component={SettingsPage} />
             </Switch>
         </BrowserRouter>
     );

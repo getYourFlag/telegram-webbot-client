@@ -2,8 +2,8 @@ import React, { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { unloadMessages } from "../actions/message";
 
-import MessageBox from "../components/MessageBox";
-import Message from "../components/Message";
+import MessageBox from "../components/messages/MessageBox";
+import Message from "../components/messages/Message";
 import { setMessageUpdate, removeMessageUpdate } from "../services/longpoll";
 import { Grid, Typography, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";

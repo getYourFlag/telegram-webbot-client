@@ -2,10 +2,10 @@ import React, {useState, useRef} from 'react';
 import { Backdrop, Box, Typography, Divider, Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Media from './Media';
-import { mediaTypes } from '../../../config/uploads.json';
+import { mediaTypes } from '../../../../config/uploads.json';
 
 import {useDispatch} from 'react-redux';
-import { sendMedia } from "../actions/sender";
+import { sendMedia } from "../../actions/sender";
 
 const useStyles = makeStyles({
     root: {

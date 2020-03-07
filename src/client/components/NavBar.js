@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { AppBar, Toolbar, Typography, Button, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+
+import SideDrawer from './SideDrawer';
 
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/auth";
@@ -15,12 +13,12 @@ import { fetchChats } from "../actions/chat";
 const NavBar = props => {
     const isAuthed = useSelector(state => state.authReducer.loggedIn);
     const botList = useSelector(state => state.botReducer.list);
+    const currentBot = useSelector(state => state.chatReducer.currentBot);
     const dispatch = useDispatch();
+    const [openDrawer, toggleDrawer] = useState(false);
 
     useEffect(() => {
-        if (isAuthed) {
-            dispatch(fetchBotList());
-        }
+        if (isAuthed) dispatch(fetchBotList());
     }, [isAuthed]);
 
     const useStyles = makeStyles(theme => ({
@@ -31,14 +29,18 @@ const NavBar = props => {
     }));
     const classes = useStyles();
 
+    let title = props.title || currentBot || "Webbot Client";
+    if (currentBot && title === currentBot) title = 'Webbot Client - ' + currentBot.name;
+    let position = props.position || "static";
+
     return (
-        <AppBar color="primary" position="static">
+        <AppBar color="primary" position={position}>
             <Toolbar>
-                <IconButton edge="start" className={classes.menuButton}>
-                    <MenuIcon />
+                <IconButton edge="start" className={classes.menuButton} onClick={_ => toggleDrawer(true)}>
+                    <MenuIcon style={{color: 'white'}}/>
                 </IconButton>
                 <Typography variant="h6" className={classes.title}>
-                    Webbot Client
+                    {title}
                 </Typography>
                 {isAuthed && botList
                     ? botList.map(bot => (
@@ -63,6 +65,7 @@ const NavBar = props => {
                     </Button>
                 )}
             </Toolbar>
+            {openDrawer ? <SideDrawer open={openDrawer} close={_ => toggleDrawer(false)} /> : null}
         </AppBar>
     );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mediaTypes } from '../../../config/uploads.json';
+import { mediaTypes } from '../../../../config/uploads.json';
 
 const Media = props => {
     let mediaType = props.type;
