@@ -48,7 +48,7 @@ router.get("/removeWebhook/:id", authMiddleware(128), async (req, res) => {
 
 router.get("/resetWebhooks", authMiddleware(255), async (req, res) => {
     let backendUrl = config.get("backend-url");
-    if (req.query.backendUrl) backendUrl = req.query.backendUrl;
+    if (req.query.url) backendUrl = req.query.url;
 
     let bots = await Bot.find();
     let deleteWebhooks = bots.map(bot =>

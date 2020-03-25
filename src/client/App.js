@@ -31,7 +31,7 @@ const App = props => {
             <Switch>
                 <Route path="/" exact component={MainPage} />
                 <Route path="/login" component={LoginPage} />
-                <Route path="/settings" component={SettingsPage} />
+                <Route path="/settings/:page" component={SettingsPage} />
             </Switch>
         </BrowserRouter>
     );
