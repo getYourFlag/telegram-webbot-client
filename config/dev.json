@@ -1,9 +1,8 @@
 {
-    "frontend-url": "http://127.0.0.1:3000",
-    "backend-url": "http://localhost:8080",
+    "frontend_url": "http://127.0.0.1:3000",
+    "backend_url": "http://localhost:8080",
     "mongodb": {
-        "url": "localhost",
-        "port": 27017,
+        "url": "localhost:27017",
         "db_name": "tgwebbot",
         "db_user": "",
         "db_pw": ""
@@ -12,15 +11,11 @@
         "expiration": 1440
     },
     "cors_path": ["http://localhost:3000", "http://127.0.0.1:3000"],
-    "telegram": {
-        "baseUrl": "https://api.telegram.org/bot",
-        "fileUrl": "https://api.telegram.org/file/bot"
-    },
     "updates": {
-        "autoUpdate": true,
-        "updateInterval": 5000
+        "auto_update": true,
+        "update_interval": 5000
     },
     "development": {
-        "logRequests": true
+        "log_requests": true
     }
 }

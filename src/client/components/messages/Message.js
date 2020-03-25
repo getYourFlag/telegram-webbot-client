@@ -79,7 +79,7 @@ const Message = props => {
     });
     let media = null;
     if (props.message.media_link) {
-        let mediaLink = config["backend-url"] + props.message.media_link;
+        let mediaLink = config["backend_url"] + props.message.media_link;
         media = <Media src={mediaLink} type={props.message.media_type} styleClass={classes.media} mimeTypes={false} />
     }
 

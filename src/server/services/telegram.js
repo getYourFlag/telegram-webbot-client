@@ -1,7 +1,7 @@
 const axios = require("axios");
 const config = require("config");
 const FormData = require("form-data");
-const baseUrl = config.get("telegram.baseUrl");
+const baseUrl = "https://api.telegram.org/bot";
 const Fs = require("fs");
 const Path = require("path");
 

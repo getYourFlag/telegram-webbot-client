@@ -9,7 +9,7 @@ const Packer = require("../services/packer");
 const { mediaTypes } = require("../../../config/telegram");
 
 router.post("/:botId", async (req, res) => {
-    if (config.get('development.logRequests')) {
+    if (config.get('development.log_requests')) {
         let logFilePath = path.resolve(__dirname, '../../../logs/requests.json');
         let requestJson = [];
         fs.readFile(logFilePath, (err, file) => {

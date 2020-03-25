@@ -3,7 +3,9 @@
         "1": "Username or password incorrect, please try again.",
         "2": "Too many failed attempts at login, please try again in 1 hour.",
         "3": "Authentication server error, please check server availibility.",
-        "4": "Your account does not have the adequate permission to complete the specified action."
+        "4": "Your account does not have the adequate permission to complete the specified action.",
+        "5": "Login token was invalid, please logout from your account and try again.",
+        "6": "Session key timeout, please logout from your account and try again."
     },
     "getChat": {
         "401": "Bot was unauthorized, the bot may be removed from the chat.",

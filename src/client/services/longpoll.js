@@ -8,7 +8,7 @@ let updateStatus = null;
 let updateChatId = null;
 let updateBotId = null;
 
-let updateInterval = config.updates.updateInterval;
+let updateInterval = config.updates.update_interval;
 
 export const setChatUpdate = botId => {
     clearInterval(updateFnId);

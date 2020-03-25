@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 const config = require("config");
 
-const dbUrl = `mongodb://${config.get("mongodb.url")}:${config.get(
-    "mongodb.port"
-)}/${config.get("mongodb.db_name")}`;
+const dbUrl = `mongodb://${config.get("mongodb.url")}/${config.get("mongodb.db_name")}`;
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,

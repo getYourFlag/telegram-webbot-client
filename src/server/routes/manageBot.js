@@ -28,8 +28,8 @@ router.get("/removeBot/:id", authMiddleware(128), (req, res) => {
 router.get("/setWebhook/:id", authMiddleware(128), async (req, res) => {
     const bot = await Bot.findById(req.params.id);
     axios
-        .post(config.get("telegram.baseUrl") + bot.token + "/setWebhook", {
-            url: config.get("backend-url") + "/receive/" + bot._id,
+        .post("https://api.telegram.org/bot" + bot.token + "/setWebhook", {
+            url: config.get("backend_url") + "/receive/" + bot._id,
         })
         .then(resData => res.status(200).send(resData.data))
         .catch(err => {
@@ -41,25 +41,25 @@ router.get("/setWebhook/:id", authMiddleware(128), async (req, res) => {
 router.get("/removeWebhook/:id", authMiddleware(128), async (req, res) => {
     const bot = await Bot.findById(req.params.id);
     axios
-        .get(config.get("telegram.baseUrl") + bot.token + "/removeWebhook")
+        .get("https://api.telegram.org/bot" + bot.token + "/removeWebhook")
         .then(resData => res.status(200).send(resData.data))
         .catch(err => res.status(500).send(err));
 });
 
 router.get("/resetWebhooks", authMiddleware(255), async (req, res) => {
-    let backendUrl = config.get("backend-url");
+    let backendUrl = config.get("backend_url");
     if (req.query.url) backendUrl = req.query.url;
 
     let bots = await Bot.find();
     let deleteWebhooks = bots.map(bot =>
-        axios.get(config.get("telegram.baseUrl") + bot.token + "/deleteWebhook")
+        axios.get("https://api.telegram.org/bot" + bot.token + "/deleteWebhook")
     );
 
     Promise.all(deleteWebhooks)
         .then(_ => {
             bots = bots.map(bot =>
                 axios.post(
-                    config.get("telegram.baseUrl") + bot.token + "/setWebhook",
+                    "https://api.telegram.org/bot" + bot.token + "/setWebhook",
                     {
                         url: backendUrl + "/receive/" + bot._id,
                     }
@@ -90,7 +90,7 @@ router.get("/webhookInfo", authMiddleware(255), async (req, res) => {
     let bots = await Bot.find();
     bots = bots.map(bot =>
         axios.get(
-            config.get("telegram.baseUrl") + bot.token + "/getWebhookInfo"
+            "https://api.telegram.org/bot" + bot.token + "/getWebhookInfo"
         )
     );
     Promise.all(bots).then(values => {
