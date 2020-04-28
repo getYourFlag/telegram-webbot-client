@@ -6,4 +6,3 @@ exports.manageBot = require("./manageBot");
 exports.getMessage = require("./getMessage");
 exports.sendMessage = require("./sendMessage");
 exports.getAsset = require("./getAsset");
-exports.setting = require("./manageSetting");

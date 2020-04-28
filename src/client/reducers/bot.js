@@ -1,5 +1,5 @@
 const initialState = {
-    list: null,
+    list: [],
     loading: false,
     error: null,
 };
@@ -19,7 +19,7 @@ const botListReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.payload,
-                list: null,
+                list: [],
                 currentBot: null,
             };
         default:

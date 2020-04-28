@@ -41,18 +41,15 @@ const Error = props => (
 const Webhook = props => {
     const dispatch = useDispatch();
     const originalServerUrl = useSelector(state => state.settingReducer.serverUrl) || '';
-    const originalDbUrl = useSelector(state => state.settingReducer.dbUrl) || ''
     const error = useSelector(state => state.settingReducer.error);
     const applying = useSelector(state => state.settingReducer.applying);
     const [serverUrl, setServerUrl] = useState(originalServerUrl);
-    const [dbUrl, setDbUrl] = useState(originalDbUrl);
     const classes = useStyles();
 
     const submitDbSettings = _ => {
         const data = {serverUrl, dbUrl}
         console.log(data);
         dispatch(applyConfigFailed("Config change has failed successfully."))
-        //dispatch(applyConfig({serverUrl, dbUrl}, "webhooks"));
     }
 
     let alertPrompt = error ? <Error message={error} /> : warnings;
@@ -82,14 +79,6 @@ const Webhook = props => {
                 </Grid>
                 <Grid item xs={8} sm={8}>
                     <Button variant="contained" color="secondary">Reset</Button>
-                </Grid>
-            </Grid>
-            <Grid item container direction="row" alignItems="center" justify="flex-start">
-                <Grid item xs={4} sm={3} lg={2}>
-                    <Typography variant="body1">Database URL</Typography>
-                </Grid>
-                <Grid item xs={8} sm={8}>
-                    <TextField name="db_url" variant="outlined" fullWidth onChange={e => setDbUrl(e.target.value)} value={dbUrl}/>
                 </Grid>
             </Grid>
             <Grid item container direction="row" alignItems="center" justify="center">

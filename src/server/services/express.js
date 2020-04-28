@@ -7,7 +7,7 @@ const routers = require("../routes");
 
 app.use(
     cors({
-        origin: config.get("cors_path"),
+        origin: [config.get("frontend_url")],
         credentials: true,
     })
 );
@@ -26,6 +26,5 @@ app.use("/bots", routers.manageBot);
 app.use("/messages", routers.getMessage);
 app.use("/send", routers.sendMessage);
 app.use("/assets", routers.getAsset);
-app.use("/setting", routers.setting);
 
 module.exports = app;
